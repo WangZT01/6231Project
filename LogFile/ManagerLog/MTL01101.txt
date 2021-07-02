@@ -1,0 +1,26 @@
+Create Teacher Record.
+Name: Tom Jimmy
+Address: southpark 
+Phone: 123456 
+Specialization: cs 
+Location: mtl 
+Time: Sat Jun 12 11:18:35 ADT 2021 
+
+
+Create Student Record.
+Name: jiaming han
+CoursesRegister: cs 
+Status: active 
+StatusDate: 5.10 
+Time: Sat Jun 12 11:19:24 ADT 2021 
+
+
+Create Teacher Record.
+Name: wqe qwe
+Address: spark 
+Phone: 12345 
+Specialization: cs 
+Location: mtl 
+Time: Sun Jun 13 11:20:01 ADT 2021 
+
+

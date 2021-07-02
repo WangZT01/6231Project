@@ -1,0 +1,16 @@
+Create Teacher Record.
+Name: qew qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sun Jun 13 23:20:30 CST 2021 
+
+
+Edit Record.
+RecordID: TR10001
+fieldName: location 
+newValue: ddo 
+Time: Sun Jun 13 23:22:26 CST 2021 
+
+

@@ -1,0 +1,49 @@
+ManagerID: LVL123
+Create Teacher Record.
+Name: QWE QWE
+Address: QWE 
+Phone: QWE 
+Specialization: QWE 
+Location: mtl 
+Time: Sat Jun 12 21:59:43 CST 2021 
+
+
+ManagerID: LVL222
+Create Teacher Record.
+Name: ttt ttt
+Address: ttt 
+Phone: ttt 
+Specialization: ttt 
+Location: mtl 
+Time: Sun Jun 13 14:10:55 CST 2021 
+
+
+ManagerID: LVLLLL
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sun Jun 13 23:52:47 CST 2021 
+
+
+ManagerID: LVL11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 23:53:27 CST 2021 
+
+
+ManagerID: LVL3333
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Mon Jun 14 06:50:56 CST 2021 
+
+

@@ -1,0 +1,8 @@
+Create Student Record.
+Name: jiaming Han
+CoursesRegister: COMP6231 
+Status: active 
+StatusDate: May.10 
+Time: Sat Jun 12 11:36:03 ADT 2021 
+
+

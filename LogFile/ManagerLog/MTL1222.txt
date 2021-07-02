@@ -1,0 +1,9 @@
+Create Teacher Record.
+Name: Rrr Rrr
+Address: rrr 
+Phone: rr 
+Specialization: rr 
+Location: mtl 
+Time: Thu Jul 01 22:23:09 CST 2021 
+
+

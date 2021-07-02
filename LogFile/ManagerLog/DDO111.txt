@@ -1,0 +1,17 @@
+Create Student Record.
+Name: ttt ttt
+CoursesRegister: ttt 
+Status: active 
+StatusDate: ttt 
+Time: Sun Jun 13 10:57:16 CST 2021 
+
+
+Create Teacher Record.
+Name: 123 123
+Address: 123 
+Phone: 123 
+Specialization: 123 
+Location: ddo 
+Time: Sun Jun 13 11:02:15 CST 2021 
+
+

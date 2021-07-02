@@ -1,0 +1,17 @@
+Create Teacher Record.
+Name: wang zitao
+Address: china 
+Phone: 12345 
+Specialization: cs 
+Location: mtl 
+Time: Sun Jun 13 14:44:30 ADT 2021 
+
+
+Create Student Record.
+Name: han jiaming
+CoursesRegister: comp 
+Status: active 
+StatusDate: may.10 
+Time: Sun Jun 13 14:44:50 ADT 2021 
+
+

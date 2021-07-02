@@ -1,0 +1,9 @@
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: q 
+Location: mtl 
+Time: Sun Jun 13 23:50:14 CST 2021 
+
+

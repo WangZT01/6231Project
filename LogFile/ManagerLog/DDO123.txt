@@ -1,0 +1,36 @@
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: ddo 
+Time: Sun Jun 13 09:31:16 CST 2021 
+
+
+Create Teacher Record.
+Name: eee eee
+Address: eee 
+Phone: eee 
+Specialization: eee 
+Location: mtl 
+Time: Sun Jun 13 09:32:56 CST 2021 
+
+
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sun Jun 13 09:33:40 CST 2021 
+
+
+Create Teacher Record.
+Name: Alice Peter
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Mon Jun 14 09:07:51 CST 2021 
+
+

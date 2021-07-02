@@ -1,0 +1,66 @@
+Create Teacher Record.
+Name: wan she
+Address: asd 
+Phone: 12345 
+Specialization: cs 
+Location: ddo 
+Time: Sun Jun 13 01:30:31 ADT 2021 
+
+
+Create Teacher Record.
+Name: wan an
+Address: spark 
+Phone: 12345 
+Specialization: cs 
+Location: ddo 
+Time: Sun Jun 13 01:30:51 ADT 2021 
+
+
+Create Teacher Record.
+Name: jiaming han
+Address: spark 
+Phone: 12345 
+Specialization: cs 
+Location: ddo 
+Time: Sun Jun 13 01:32:18 ADT 2021 
+
+
+Create Student Record.
+Name: jia ming
+CoursesRegister: cs 
+Status: active 
+StatusDate: 1212 
+Time: Sun Jun 13 01:33:38 ADT 2021 
+
+
+Create Teacher Record.
+Name: zi tao
+Address: asd 
+Phone: 214421 
+Specialization: cs 
+Location: ddo 
+Time: Sun Jun 13 01:34:23 ADT 2021 
+
+
+Create Student Record.
+Name: zi ao
+CoursesRegister: cs 
+Status: active 
+StatusDate: 1212 
+Time: Sun Jun 13 01:36:57 ADT 2021 
+
+
+Edit Record.
+RecordID: TR10002
+fieldName: location 
+newValue: sda 
+Time: Sun Jun 13 02:15:37 ADT 2021 
+
+
+Edit Record.
+RecordID: TR10002
+fieldName: locat 
+newValue: sadsad 
+Time: Sun Jun 13 02:19:31 ADT 2021 
+
+

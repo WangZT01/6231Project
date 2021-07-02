@@ -1,0 +1,512 @@
+ManagerID: DDO10001
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sat Jun 12 21:41:23 CST 2021 
+
+
+ManagerID: DDO10001
+Create Student Record.
+Name: qqq qqq
+CoursesRegister: qqq 
+Status: active 
+StatusDate: qqq 
+Time: Sat Jun 12 21:43:28 CST 2021 
+
+
+ManagerID: DDO10001
+Create Teacher Record.
+Name: QWE QWE
+Address: QWE 
+Phone: QWE 
+Specialization: QWE 
+Location: mtl 
+Time: Sat Jun 12 21:52:10 CST 2021 
+
+
+Edit Record.
+ManagerID: DDO10001
+RecordID: TR10001
+fieldName: Location 
+newValue: lvl 
+Time: Sat Jun 12 21:52:26 CST 2021 
+
+
+ManagerID: DDO1
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: lvl 
+Time: Sat Jun 12 21:55:34 CST 2021 
+
+
+ManagerID: DDO10001
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sat Jun 12 22:00:39 CST 2021 
+
+
+ManagerID: DDO123
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: ddo 
+Time: Sun Jun 13 09:31:16 CST 2021 
+
+
+ManagerID: DDO123
+Create Teacher Record.
+Name: eee eee
+Address: eee 
+Phone: eee 
+Specialization: eee 
+Location: mtl 
+Time: Sun Jun 13 09:32:56 CST 2021 
+
+
+ManagerID: DDO123
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sun Jun 13 09:33:40 CST 2021 
+
+
+ManagerID: DDO333
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qweqw 
+Specialization: eqwe 
+Location: lvl 
+Time: Sun Jun 13 09:34:15 CST 2021 
+
+
+ManagerID: DDO10001
+Create Teacher Record.
+Name: rrr rrr
+Address: rrr 
+Phone: rrr 
+Specialization: rrr 
+Location: mtl 
+Time: Sun Jun 13 10:42:54 CST 2021 
+
+
+ManagerID: DDO111
+Create Student Record.
+Name: ttt ttt
+CoursesRegister: ttt 
+Status: active 
+StatusDate: ttt 
+Time: Sun Jun 13 10:57:16 CST 2021 
+
+
+ManagerID: DDO1111
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sun Jun 13 11:00:52 CST 2021 
+
+
+ManagerID: DDO111
+Create Teacher Record.
+Name: 123 123
+Address: 123 
+Phone: 123 
+Specialization: 123 
+Location: ddo 
+Time: Sun Jun 13 11:02:15 CST 2021 
+
+
+ManagerID: DDO11111
+Create Teacher Record.
+Name: qweqwe qwe
+Address: qwe 
+Phone: qweqw 
+Specialization: e 
+Location: mtl 
+Time: Sun Jun 13 13:37:42 CST 2021 
+
+
+ManagerID: DDO1001
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sun Jun 13 13:43:02 CST 2021 
+
+
+ManagerID: DDO333
+Create Teacher Record.
+Name: qwe qwe
+Address: qew 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sun Jun 13 14:02:25 CST 2021 
+
+
+ManagerID: MTL11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Sun Jun 13 21:29:41 CST 2021 
+
+
+ManagerID: MTL11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Sun Jun 13 21:31:25 CST 2021 
+
+
+ManagerID: MTL11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Sun Jun 13 21:31:25 CST 2021 
+
+
+ManagerID: MTL11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Sun Jun 13 21:31:41 CST 2021 
+
+
+ManagerID: MTL11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:33:58 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:38:16 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:40:27 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:43:20 CST 2021 
+
+
+Edit Record.
+ManagerID: DDO11111
+RecordID: SR10001
+fieldName: status 
+newValue: inactive 
+Time: Sun Jun 13 21:43:20 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:45:55 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:46:14 CST 2021 
+
+
+ManagerID: DDO11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Sun Jun 13 21:51:35 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:51:35 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:51:35 CST 2021 
+
+
+Edit Record.
+ManagerID: DDO11111
+RecordID: SR10001
+fieldName: status 
+newValue: inactive 
+Time: Sun Jun 13 21:51:35 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 21:51:35 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sun Jun 13 22:02:19 CST 2021 
+
+
+ManagerID: DDO123
+Create Teacher Record.
+Name: Alice Peter
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Mon Jun 14 09:07:51 CST 2021 
+
+
+ManagerID: DDO11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Mon Jun 14 09:31:37 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:31:37 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:31:37 CST 2021 
+
+
+Edit Record.
+ManagerID: DDO11111
+RecordID: SR10001
+fieldName: status 
+newValue: inactive 
+Time: Mon Jun 14 09:31:37 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:31:37 CST 2021 
+
+
+ManagerID: DDO11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Mon Jun 14 09:49:00 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:49:00 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:49:00 CST 2021 
+
+
+Edit Record.
+ManagerID: DDO11111
+RecordID: SR10001
+fieldName: status 
+newValue: inactive 
+Time: Mon Jun 14 09:49:00 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:49:00 CST 2021 
+
+
+ManagerID: DDO11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Mon Jun 14 09:59:24 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:59:24 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:59:24 CST 2021 
+
+
+Edit Record.
+ManagerID: DDO11111
+RecordID: SR10001
+fieldName: status 
+newValue: inactive 
+Time: Mon Jun 14 09:59:24 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Mon Jun 14 09:59:24 CST 2021 
+
+
+ManagerID: DDO11111
+Create Teacher Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Fri Jun 25 14:35:46 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Fri Jun 25 14:35:46 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Fri Jun 25 14:35:46 CST 2021 
+
+
+Edit Record.
+ManagerID: DDO11111
+RecordID: SR10001
+fieldName: status 
+newValue: inactive 
+Time: Fri Jun 25 14:35:46 CST 2021 
+
+
+ManagerID: DDO11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Fri Jun 25 14:35:46 CST 2021 
+
+

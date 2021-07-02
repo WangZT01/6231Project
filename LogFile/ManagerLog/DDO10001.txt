@@ -1,0 +1,51 @@
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sat Jun 12 21:41:23 CST 2021 
+
+
+Create Student Record.
+Name: qqq qqq
+CoursesRegister: qqq 
+Status: active 
+StatusDate: qqq 
+Time: Sat Jun 12 21:43:28 CST 2021 
+
+
+Create Teacher Record.
+Name: QWE QWE
+Address: QWE 
+Phone: QWE 
+Specialization: QWE 
+Location: mtl 
+Time: Sat Jun 12 21:52:10 CST 2021 
+
+
+Edit Record.
+RecordID: TR10001
+fieldName: Location 
+newValue: lvl 
+Time: Sat Jun 12 21:52:26 CST 2021 
+
+
+Create Teacher Record.
+Name: qwe qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sat Jun 12 22:00:39 CST 2021 
+
+
+Create Teacher Record.
+Name: rrr rrr
+Address: rrr 
+Phone: rrr 
+Specialization: rrr 
+Location: mtl 
+Time: Sun Jun 13 10:42:54 CST 2021 
+
+

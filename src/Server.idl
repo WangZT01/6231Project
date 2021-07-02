@@ -1,0 +1,18 @@
+module ServerModule{
+    interface Creator{
+
+        boolean createTRecord (in string managerID,in string firstName,in string lastName,in string Address,
+                                          in string Phone,in string Specialization,in string Location);
+
+        boolean createSRecord (in string managerID,in string firstName,in string lastName,in string CoursesRegistered,
+                                          in string Status,in string StatusDate);
+
+        boolean editRecord (in string managerID,in string recordID,in string fieldName,in string newValue);
+
+        boolean printRecord (in string ManagerID);
+
+        boolean transferRecord (in string managerID,in string recordID,in string remoteCenterServerName);
+
+        string getRecordCounts();
+    };
+};

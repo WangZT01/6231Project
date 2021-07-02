@@ -1,0 +1,100 @@
+Create Teacher Record.
+Name: Jiaming Han
+Address: soutpark 
+Phone: 1234567 
+Specialization: cs 
+Location: mtl 
+Time: Sun Jun 13 00:51:16 ADT 2021 
+
+
+Edit Record.
+RecordID: TR10003
+fieldName: address 
+newValue: spark 
+Time: Sun Jun 13 01:09:05 ADT 2021 
+
+
+Create Student Record.
+Name: jia ming
+CoursesRegister: cs 
+Status: active 
+StatusDate: may.10 
+Time: Sun Jun 13 01:18:44 ADT 2021 
+
+
+Create Teacher Record.
+Name: asd asd
+Address: asd 
+Phone: asd 
+Specialization: asd 
+Location: ddo 
+Time: Sun Jun 13 01:19:01 ADT 2021 
+
+
+Create Student Record.
+Name: asd asd
+CoursesRegister: asd 
+Status: inactive 
+StatusDate: asd 
+Time: Sun Jun 13 01:21:15 ADT 2021 
+
+
+Create Teacher Record.
+Name: jiaming Han
+Address: spark 
+Phone: 12345 
+Specialization: cs 
+Location: mtl 
+Time: Sun Jun 13 01:40:13 ADT 2021 
+
+
+Create Teacher Record.
+Name: jiaming wan
+Address: spark 
+Phone: 12345 
+Specialization: cs 
+Location: mtl 
+Time: Sun Jun 13 01:40:47 ADT 2021 
+
+
+Create Teacher Record.
+Name: jiaming Tom
+Address: asd 
+Phone: 12345 
+Specialization: cs 
+Location: mtl 
+Time: Sun Jun 13 01:55:45 ADT 2021 
+
+
+Create Student Record.
+Name: qwe ewq
+CoursesRegister: cs 
+Status: active 
+StatusDate: 1321 
+Time: Sun Jun 13 02:07:09 ADT 2021 
+
+
+Create Teacher Record.
+Name: jia ming
+Address: spark 
+Phone: 12345 
+Specialization: cs 
+Location: mtl 
+Time: Sun Jun 13 10:58:18 ADT 2021 
+
+
+Create Student Record.
+Name: aij ming
+CoursesRegister: spark 
+Status: active 
+StatusDate: 1234 
+Time: Sun Jun 13 10:59:15 ADT 2021 
+
+
+Edit Record.
+RecordID: TR10001
+fieldName: locat 
+newValue: mmt 
+Time: Sun Jun 13 11:00:41 ADT 2021 
+
+

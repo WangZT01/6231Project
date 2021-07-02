@@ -1,0 +1,18 @@
+Create Teacher Record.
+Name: wan she
+Address: spark 
+Phone: 123456 
+Specialization: cs 
+Location: ddo 
+Time: Sun Jun 13 01:27:57 ADT 2021 
+
+
+Create Teacher Record.
+Name: wan an
+Address: spark 
+Phone: 123456 
+Specialization: cs 
+Location: ddo 
+Time: Sun Jun 13 01:28:49 ADT 2021 
+
+
