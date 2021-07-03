@@ -8,18 +8,23 @@ import ServerModule.CreatorPOA;
 import org.omg.CORBA.ORB;
 
 import java.io.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The server implement the remote interface.
  * Must inherit UnicastRemoteObject to allow JVM to create remote stubs/proxy
  */
-public class MethodDDO extends CreatorPOA implements CenterServer {
+public class MethodDDO extends CreatorPOA {
 
     private ORB orb;
     public void setORB(ORB orb_val) {
@@ -30,9 +35,9 @@ public class MethodDDO extends CreatorPOA implements CenterServer {
         orb.shutdown(false);
     }
 
-    HashMap<Character, ArrayList<Record>> HashMapMTL = new HashMap<Character, ArrayList<Record>>();
-    HashMap<Character, ArrayList<Record>> HashMapLVL = new HashMap<Character, ArrayList<Record>>();
-    HashMap<Character, ArrayList<Record>> HashMapDDO = new HashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapMTL = new ConcurrentHashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapLVL = new ConcurrentHashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapDDO = new ConcurrentHashMap<Character, ArrayList<Record>>();
 
     File loggingFile = new File("");
     String FilePath = loggingFile.getAbsolutePath();
@@ -40,7 +45,7 @@ public class MethodDDO extends CreatorPOA implements CenterServer {
     File loggingFileLVL = new File( FilePath + "\\" + "LogFile" + "\\" + "LVLFile"+ "\\" + "LVLLog" +".txt");
     File loggingFileDDO = new File( FilePath + "\\" + "LogFile" + "\\" + "DDOFile"+ "\\" + "DDOLog" +".txt");
 
-    int MTLcount = 0;
+    int DDOcount = 0;
 
 
     public MethodDDO() throws RemoteException {
@@ -96,8 +101,8 @@ public class MethodDDO extends CreatorPOA implements CenterServer {
             return false;
         }
         TeacherRecord NewTRecord = new TeacherRecord(firstName, lastName, Address, Phone, Specialization, Location);
-        MTLcount++;
-        NewTRecord.setRecordID(MTLcount);
+        DDOcount++;
+        NewTRecord.setRecordID(DDOcount);
         ArrayList<Record> Recordlist = new ArrayList<>();
 
         String writeInLog = "ManagerID: " + managerID + "\n" +
@@ -191,8 +196,8 @@ public class MethodDDO extends CreatorPOA implements CenterServer {
             return false;
         }
         StudentRecord NewSRecord = new StudentRecord(firstName, lastName, CoursesRegistered, Status, StatusDate);
-        MTLcount++;
-        NewSRecord.setRecordID(MTLcount);
+        DDOcount++;
+        NewSRecord.setRecordID(DDOcount);
         ArrayList<Record> Recordlist = new ArrayList<>();
 
         String writeInLog = "ManagerID: " + managerID + "\n" +
@@ -557,7 +562,19 @@ public class MethodDDO extends CreatorPOA implements CenterServer {
     //Get the number of records of all servers（include current server） from the current server
     @Override
     public String getRecordCounts()   {
-        String sendStr = "MTL " + String.valueOf(MTLcount);
+
+        int count = 0;
+        ArrayList<Record> Recordlist = new ArrayList<>();
+        for(char key: HashMapDDO.keySet()) {
+
+            Recordlist = HashMapDDO.get(key);
+            for (int i = 0; i < Recordlist.size(); i++) {
+                count++;
+            }
+        }
+        String sendStrDDO = "DDO " + String.valueOf(count);
+
+        String sendStr = sendStrDDO;
         return sendStr;
     }
 
@@ -575,9 +592,9 @@ public class MethodDDO extends CreatorPOA implements CenterServer {
     public void save(){
         try {
             FileOutputStream l_saveFile = null;
-            l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "MTLFile" + "\\" + "MTLServer" + ".txt");
+            l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "DDOServer" + ".txt");
             ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
-            l_Save.writeObject(this);
+            l_Save.writeObject(HashMapDDO);
             l_Save.flush();
             l_Save.close();
 
@@ -587,7 +604,7 @@ public class MethodDDO extends CreatorPOA implements CenterServer {
         System.out.println("write object success!");
     }
 
-    private void storingRecord(Record record,HashMap<Character,ArrayList<Record>> hashMap){
+    private void storingRecord(Record record,ConcurrentHashMap<Character,ArrayList<Record>> hashMap){
         // Get the first letter.
         char Mark;
         Mark = record.getLastName().charAt(0);
@@ -607,4 +624,5 @@ public class MethodDDO extends CreatorPOA implements CenterServer {
             hashMap.put(Mark, Recordlist);
         }
     }
+
 }

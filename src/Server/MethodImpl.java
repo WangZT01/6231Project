@@ -8,18 +8,23 @@ import ServerModule.CreatorPOA;
 import org.omg.CORBA.ORB;
 
 import java.io.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The server implement the remote interface.
  * Must inherit UnicastRemoteObject to allow JVM to create remote stubs/proxy
  */
-public class MethodLVL extends CreatorPOA implements CenterServer {
+public class MethodImpl extends CreatorPOA implements Serializable{
 
     private ORB orb;
     public void setORB(ORB orb_val) {
@@ -30,9 +35,9 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
         orb.shutdown(false);
     }
 
-    HashMap<Character, ArrayList<Record>> HashMapMTL = new HashMap<Character, ArrayList<Record>>();
-    HashMap<Character, ArrayList<Record>> HashMapLVL = new HashMap<Character, ArrayList<Record>>();
-    HashMap<Character, ArrayList<Record>> HashMapDDO = new HashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapMTL = new ConcurrentHashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapLVL = new ConcurrentHashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapDDO = new ConcurrentHashMap<Character, ArrayList<Record>>();
 
     File loggingFile = new File("");
     String FilePath = loggingFile.getAbsolutePath();
@@ -40,19 +45,24 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
     File loggingFileLVL = new File( FilePath + "\\" + "LogFile" + "\\" + "LVLFile"+ "\\" + "LVLLog" +".txt");
     File loggingFileDDO = new File( FilePath + "\\" + "LogFile" + "\\" + "DDOFile"+ "\\" + "DDOLog" +".txt");
 
+    int LVLcount = 0;
     int MTLcount = 0;
+    int DDOcount = 0;
+    String name = "NULL";
+
+    HashMap<String, Integer> ServerPort = new HashMap<String, Integer>();
 
 
-    public MethodLVL() throws RemoteException {
+    public MethodImpl(String name) throws RemoteException {
 
         super();
-        if(!loggingFileMTL.exists()){
-            try {
-                loggingFileMTL.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        load("LVL");
+        load("DDO");
+        load("MTL");
+        ServerPort.put("MTL", 5053);
+        ServerPort.put("LVL", 5052);
+        ServerPort.put("DDO", 5051);
+        this.name = name;
     }
 
     /**
@@ -96,8 +106,7 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
             return false;
         }
         TeacherRecord NewTRecord = new TeacherRecord(firstName, lastName, Address, Phone, Specialization, Location);
-        MTLcount++;
-        NewTRecord.setRecordID(MTLcount);
+
         ArrayList<Record> Recordlist = new ArrayList<>();
 
         String writeInLog = "ManagerID: " + managerID + "\n" +
@@ -111,6 +120,8 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
 
         if(managerID.startsWith("MTL")){
 
+            MTLcount = 1 + getRecordCountsByInt(HashMapMTL);
+            NewTRecord.setRecordID(MTLcount);
             // Get the first letter.
             char Mark;
             Mark = lastName.charAt(0);
@@ -129,10 +140,13 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                 HashMapMTL.put(Mark, Recordlist);
             }
             writeLog(writeInLog, loggingFileMTL);
+            save("MTL");
 
         }
         else if(managerID.startsWith("LVL")){
 
+            LVLcount = 1 + getRecordCountsByInt(HashMapLVL);
+            NewTRecord.setRecordID(LVLcount);
             char Mark;
             Mark = lastName.charAt(0);
             if(HashMapLVL.containsKey(Mark)){
@@ -146,9 +160,12 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                 HashMapLVL.put(Mark, Recordlist);
             }
             writeLog(writeInLog, loggingFileLVL);
+            save("LVL");
         }
         else if(managerID.startsWith("DDO")){
 
+            DDOcount = 1 + getRecordCountsByInt(HashMapDDO);
+            NewTRecord.setRecordID(DDOcount);
             char Mark;
             Mark = lastName.charAt(0);
             if(HashMapDDO.containsKey(Mark)){
@@ -162,12 +179,12 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                 HashMapDDO.put(Mark, Recordlist);
             }
             writeLog(writeInLog, loggingFileDDO);
+            save("DDO");
         }
         else{
             System.out.println("Access Deny!(ManagerID is invalid)");
             return false;
         }
-        save();
 
         return true;
     }
@@ -191,8 +208,7 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
             return false;
         }
         StudentRecord NewSRecord = new StudentRecord(firstName, lastName, CoursesRegistered, Status, StatusDate);
-        MTLcount++;
-        NewSRecord.setRecordID(MTLcount);
+
         ArrayList<Record> Recordlist = new ArrayList<>();
 
         String writeInLog = "ManagerID: " + managerID + "\n" +
@@ -204,6 +220,9 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                 "Time: " + getTime() + " " + "\n" + "\n";
 
         if(managerID.startsWith("MTL")){
+
+            MTLcount = 1 + getRecordCountsByInt(HashMapMTL);
+            NewSRecord.setRecordID(MTLcount);
             char Mark;
             Mark = lastName.charAt(0);
             if(HashMapMTL.containsKey(Mark)){
@@ -217,10 +236,13 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                 HashMapMTL.put(Mark, Recordlist);
             }
             writeLog(writeInLog, loggingFileMTL);
+            save("MTL");
         }
 
         else if(managerID.startsWith("LVL")){
 
+            LVLcount = getRecordCountsByInt(HashMapLVL) + 1;
+            NewSRecord.setRecordID(LVLcount);
             char Mark;
             Mark = lastName.charAt(0);
             if(HashMapLVL.containsKey(Mark)){
@@ -234,9 +256,12 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                 HashMapLVL.put(Mark, Recordlist);
             }
             writeLog(writeInLog, loggingFileLVL);
+            save("LVL");
         }
         else if(managerID.startsWith("DDO")){
 
+            DDOcount = getRecordCountsByInt(HashMapDDO) + 1;
+            NewSRecord.setRecordID(DDOcount);
             char Mark;
             Mark = lastName.charAt(0);
             if(HashMapDDO.containsKey(Mark)){
@@ -250,12 +275,13 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                 HashMapDDO.put(Mark, Recordlist);
             }
             writeLog(writeInLog, loggingFileDDO);
+            save("DDO");
         }
         else{
             System.out.println("Access Deny!(ManagerID is invalid)");
             return false;
         }
-        save();
+        save("LVL");
 
         return true;
 
@@ -307,7 +333,7 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                         "newValue: " + newValue + " " + "\n" +
                         "Time: " + getTime() + " " + "\n" + "\n";
                 writeLog(writeInLog, loggingFileMTL);
-                save();
+                save("MTL");
             }
             else{
                 System.out.println("No Record.");
@@ -352,7 +378,7 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                         "newValue: " + newValue + " " + "\n" +
                         "Time: " + getTime() + " " + "\n" + "\n";
                 writeLog(writeInLog, loggingFileLVL);
-                save();
+                save("LVL");
             }
             else{
                 System.out.println("No Record.");
@@ -400,7 +426,7 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
                         "newValue: " + newValue + " " + "\n" +
                         "Time: " + getTime() + " " + "\n" + "\n";
                 writeLog(writeInLog, loggingFileDDO);
-                save();
+                save("DDO");
             }
             else{
                 System.out.println("No Record.");
@@ -455,25 +481,40 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
             //remove
             ArrayList<Record> theArrayList = null;
             if(managerID.trim().startsWith("MTL")){
-                theArrayList=HashMapMTL.get(targetRecord.getLastName().charAt(0));
+                HashMapMTL.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
+                save("MTL");
             }
             else if(managerID.trim().startsWith("DDO")){
-                theArrayList=HashMapDDO.get(targetRecord.getLastName().charAt(0));
+                HashMapDDO.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
+                save("DDO");
             }
             else{
-                theArrayList=HashMapLVL.get(targetRecord.getLastName().charAt(0));
+                HashMapLVL.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
+                save("LVL");
             }
-
-            theArrayList.remove(targetRecord);
 
             //add
             boolean flag = true;
-            if(remoteCenterServerName.trim().startsWith("DDO"))
-                storingRecord(targetRecord,HashMapDDO);
-            else if(remoteCenterServerName.trim().startsWith("LVL"))
+            if(remoteCenterServerName.trim().startsWith("DDO")) {
+                storingRecord(targetRecord, HashMapDDO);
+                save("DDO");
+                sendUdpMessage(this.name + "Transfer Record",5051);
+
+
+            }
+            else if(remoteCenterServerName.trim().startsWith("LVL")){
                 storingRecord(targetRecord,HashMapLVL);
-            else if(remoteCenterServerName.trim().startsWith("MTL"))
+                save("LVL");
+                sendUdpMessage(this.name + "Transfer Record",5052);
+
+            }
+
+            else if(remoteCenterServerName.trim().startsWith("MTL")){
                 storingRecord(targetRecord,HashMapMTL);
+                save("MTL");
+                sendUdpMessage(this.name + "Transfer Record",5053);
+
+            }
             else
                 flag=false;
             //log
@@ -557,8 +598,31 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
     //Get the number of records of all servers（include current server） from the current server
     @Override
     public String getRecordCounts()   {
-        String sendStr = "MTL " + String.valueOf(MTLcount);
+
+        int countLVL = getRecordCountsByInt(HashMapLVL);
+        int countDDO = getRecordCountsByInt(HashMapDDO);
+        int countMTL = getRecordCountsByInt(HashMapMTL);
+
+        String sendStrLVL = "LVL " + String.valueOf(countLVL);
+        String sendStrMTL = "MTL " + String.valueOf(countMTL);
+        String sendStrDDO = "DDO " + String.valueOf(countDDO);
+
+        String sendStr =sendStrMTL + sendStrLVL + sendStrDDO;
         return sendStr;
+    }
+
+    public int getRecordCountsByInt(ConcurrentHashMap hashmap){
+
+        int count = 0;
+        ArrayList<Record> Recordlist = new ArrayList<>();
+        for(Object key: hashmap.keySet()) {
+
+            Recordlist = (ArrayList<Record>) hashmap.get(key);
+            for (int i = 0; i < Recordlist.size(); i++) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public  String getTime(){
@@ -572,14 +636,34 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
     /**
      * Save the Server.
      */
-    public void save(){
+    public void save(String Location){
+
+
         try {
             FileOutputStream l_saveFile = null;
-            l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "MTLFile" + "\\" + "MTLServer" + ".txt");
-            ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
-            l_Save.writeObject(this);
-            l_Save.flush();
-            l_Save.close();
+            if(Location.equals("LVL")){
+                l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "LVLFile" + "\\" + "LVLServer" + ".txt");
+                ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
+                l_Save.writeObject(HashMapLVL);
+                l_Save.flush();
+                l_Save.close();
+            }
+            else if(Location.equals("MTL")){
+                l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "MTLFile" + "\\" + "MTLServer" + ".txt");
+                ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
+                l_Save.writeObject(HashMapMTL);
+                l_Save.flush();
+                l_Save.close();
+            }
+            else if(Location.equals("DDO")){
+                l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "DDOServer" + ".txt");
+                ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
+                l_Save.writeObject(HashMapDDO);
+                l_Save.flush();
+                l_Save.close();
+            }
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -587,7 +671,40 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
         System.out.println("write object success!");
     }
 
-    private void storingRecord(Record record,HashMap<Character,ArrayList<Record>> hashMap){
+    /**
+     * Load the Server.
+     */
+    public boolean load(String Location){
+
+        boolean flag = false;
+
+        try {
+
+            ObjectInputStream l_ois = null;
+            if(Location.equals("LVL")){
+                l_ois = new ObjectInputStream(new FileInputStream(FilePath + "\\" + "LogFile" + "\\" + "LVLFile" + "\\" + "LVLServer" + ".txt"));
+                this.HashMapLVL = (ConcurrentHashMap<Character, ArrayList<Record>>) l_ois.readObject();
+                flag = true;
+            }
+            else if(Location.equals("MTL")){
+                l_ois = new ObjectInputStream(new FileInputStream(FilePath + "\\" + "LogFile" + "\\" + "MTLFile" + "\\" + "MTLServer" + ".txt"));
+                this.HashMapMTL = (ConcurrentHashMap<Character, ArrayList<Record>>) l_ois.readObject();
+                flag = true;
+            }
+            else if(Location.equals("DDO")){
+                l_ois = new ObjectInputStream(new FileInputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "DDOServer" + ".txt"));
+                this.HashMapDDO = (ConcurrentHashMap<Character, ArrayList<Record>>) l_ois.readObject();
+                flag = true;
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            //e.printStackTrace();
+            System.out.println("The Map is Empty!");
+        }
+        return flag;
+    }
+
+    private void storingRecord(Record record,ConcurrentHashMap<Character,ArrayList<Record>> hashMap){
         // Get the first letter.
         char Mark;
         Mark = record.getLastName().charAt(0);
@@ -607,4 +724,61 @@ public class MethodLVL extends CreatorPOA implements CenterServer {
             hashMap.put(Mark, Recordlist);
         }
     }
+
+    public String sendUdpMessage(String message, int serverPort) {
+        String serverMsg = "";
+        DatagramSocket clientSocket = null;
+        try {
+            clientSocket = new DatagramSocket();
+            byte[] sendData = new byte[1000];
+            sendData = message.getBytes();
+            InetAddress clientHost = InetAddress.getByName("127.0.0.1");
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientHost, serverPort);
+            clientSocket.send(sendPacket);
+
+        } catch (SocketException e) {
+            System.out.println("Socket: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO: " + e.getMessage());
+        } finally {
+            if (clientSocket != null) {
+                clientSocket.close();
+                clientSocket = null;
+            }
+        }
+        return serverMsg;
+    }
+
+    public void UDPServer(int port) {
+        DatagramSocket socket = null;
+        try {
+            socket = new DatagramSocket(port);
+            System.out.println("UDP Server Started at port: " + port);
+            System.out.println("Waiting for client...");
+            while (true) {
+                byte[] buffer = new byte[1000];
+                DatagramPacket request = new DatagramPacket(buffer,
+                        buffer.length);
+                socket.receive(request);
+
+                String recvStr = new String(request.getData(), 0, request.getLength());
+                System.out.println(recvStr);
+
+
+                DatagramPacket reply = new DatagramPacket(buffer,
+                        buffer.length, request.getAddress(), request.getPort());
+                socket.send(reply);
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (socket != null) {
+                socket.close();
+                System.out.println("UDP Server Closed");
+            }
+        }
+    }
+
 }

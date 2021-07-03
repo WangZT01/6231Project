@@ -111,3 +111,7 @@ Location: mtl
 Time: Sun Jun 13 11:20:52 ADT 2021 
 
 
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: DDO 
+

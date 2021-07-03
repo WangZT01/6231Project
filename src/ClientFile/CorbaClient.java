@@ -10,6 +10,8 @@ import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.net.*;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -110,7 +112,8 @@ public class CorbaClient {
                                     "2.Create Student Record." + "\n" +
                                     "3.Get Record Counts." + "\n" +
                                     "4. Edit Record." + "\n" +
-                                    "5. Print Record." + "\n" +
+                                    "5. Transfer Record." + "\n" +
+                                    "6. Print Record." + "\n" +
                                     "0. EXIT");
                     ManagerInput = ManagerScanner.nextInt();
 
@@ -194,6 +197,7 @@ public class CorbaClient {
 
                         // get record count
                         case 3:
+
                             System.out.println(creator.getRecordCounts());
                             break;
 
@@ -229,8 +233,31 @@ public class CorbaClient {
                             }
                             break;
 
-                        // print record
+                        // transfer record
                         case 5:
+
+                            System.out.println("Please input the RecordID which you want to transfer.");
+                            String recordID = ManagerScanner.next();
+                            System.out.println("Please input the remoteCenterServer which you want to transfer.");
+                            String remoteCenterServer = ManagerScanner.next();
+
+                            result = creator.transferRecord(ManagerID, recordID, remoteCenterServer);
+
+                            if (result) {
+                                System.out.println("success!");
+                                String writeInLog = "Transfer Record." + "\n" +
+                                        "RecordID: " + recordID + "\n" +
+                                        "remoteCenterServer: " + remoteCenterServer + " " + "\n";
+
+                                manager.writeLog(writeInLog);
+
+                            } else {
+                                System.out.println("access deny.");
+                            }
+                            break;
+
+                        // print record
+                        case 6:
                             result = creator.printRecord(ManagerID);
                             if (result) {
                                 System.out.println("success!");

@@ -8,6 +8,10 @@ import ServerModule.CreatorPOA;
 import org.omg.CORBA.ORB;
 
 import java.io.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
@@ -15,12 +19,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The server implement the remote interface.
  * Must inherit UnicastRemoteObject to allow JVM to create remote stubs/proxy
  */
-public class MethodMTL extends CreatorPOA implements CenterServer {
+public class MethodMTL extends CreatorPOA implements Serializable  {
 
     private ORB orb;
     public void setORB(ORB orb_val) {
@@ -31,9 +36,9 @@ public class MethodMTL extends CreatorPOA implements CenterServer {
         orb.shutdown(false);
     }
 
-    HashMap<Character, ArrayList<Record>> HashMapMTL = new HashMap<Character, ArrayList<Record>>();
-    HashMap<Character, ArrayList<Record>> HashMapLVL = new HashMap<Character, ArrayList<Record>>();
-    HashMap<Character, ArrayList<Record>> HashMapDDO = new HashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapMTL = new ConcurrentHashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapLVL = new ConcurrentHashMap<Character, ArrayList<Record>>();
+    ConcurrentHashMap<Character, ArrayList<Record>> HashMapDDO = new ConcurrentHashMap<Character, ArrayList<Record>>();
 
     File loggingFile = new File("");
     String FilePath = loggingFile.getAbsolutePath();
@@ -42,6 +47,8 @@ public class MethodMTL extends CreatorPOA implements CenterServer {
     File loggingFileDDO = new File( FilePath + "\\" + "LogFile" + "\\" + "DDOFile"+ "\\" + "DDOLog" +".txt");
 
     int MTLcount = 0;
+    int LVLcount = 0;
+    int DDOcount = 0;
 
 
     public MethodMTL() throws RemoteException {
@@ -558,7 +565,19 @@ public class MethodMTL extends CreatorPOA implements CenterServer {
     //Get the number of records of all servers（include current server） from the current server
     @Override
     public String getRecordCounts()   {
-        String sendStr = "MTL " + String.valueOf(MTLcount);
+
+        int count = 0;
+        ArrayList<Record> Recordlist = new ArrayList<>();
+        for(char key: HashMapMTL.keySet()) {
+
+            Recordlist = HashMapMTL.get(key);
+            for (int i = 0; i < Recordlist.size(); i++) {
+                count++;
+            }
+        }
+
+        String sendStrMTL = "MTL " + String.valueOf(count);
+        String sendStr = sendStrMTL;
         return sendStr;
     }
 
@@ -578,7 +597,7 @@ public class MethodMTL extends CreatorPOA implements CenterServer {
             FileOutputStream l_saveFile = null;
             l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "MTLFile" + "\\" + "MTLServer" + ".txt");
             ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
-            l_Save.writeObject(this);
+            l_Save.writeObject(HashMapMTL);
             l_Save.flush();
             l_Save.close();
 
@@ -588,7 +607,8 @@ public class MethodMTL extends CreatorPOA implements CenterServer {
         System.out.println("write object success!");
     }
 
-    private void storingRecord(Record record,HashMap<Character,ArrayList<Record>> hashMap){
+
+    private void storingRecord(Record record,ConcurrentHashMap<Character,ArrayList<Record>> hashMap){
         // Get the first letter.
         char Mark;
         Mark = record.getLastName().charAt(0);
@@ -608,4 +628,5 @@ public class MethodMTL extends CreatorPOA implements CenterServer {
             hashMap.put(Mark, Recordlist);
         }
     }
+
 }

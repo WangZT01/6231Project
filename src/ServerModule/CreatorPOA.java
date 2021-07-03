@@ -1,6 +1,8 @@
 package ServerModule;
 
 
+import java.io.Serializable;
+
 /**
 * ServerModule/CreatorPOA.java .
 * 由IDL-to-Java 编译器 (可移植), 版本 "3.2"生成
@@ -9,7 +11,7 @@ package ServerModule;
 */
 
 public abstract class CreatorPOA extends org.omg.PortableServer.Servant
- implements ServerModule.CreatorOperations, org.omg.CORBA.portable.InvokeHandler
+ implements ServerModule.CreatorOperations, org.omg.CORBA.portable.InvokeHandler, Serializable
 {
 
   // Constructors

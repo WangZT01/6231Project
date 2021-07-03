@@ -49,3 +49,7 @@ StatusDate: qwe
 Time: Mon Jun 14 07:42:40 CST 2021 
 
 
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: DDO 
+
