@@ -1,0 +1,33 @@
+Create Student Record.
+Name: Rrr Rrr
+CoursesRegister: rrr 
+Status: active 
+StatusDate: rrr 
+Time: Sun Jul 04 22:56:24 CST 2021 
+
+
+Create Teacher Record.
+Name: Yyy Yyy
+Address: yyy 
+Phone: yyy 
+Specialization: yyy 
+Location: mtl 
+Time: Sun Jul 04 22:56:40 CST 2021 
+
+
+Transfer Record.
+RecordID: TR10014
+remoteCenterServer: LVL 
+
+Create Student Record.
+Name: Zitao Wang
+CoursesRegister: COMP6231 
+Status: active 
+StatusDate: 20210506 
+Time: Sun Jul 04 23:02:11 CST 2021 
+
+
+Transfer Record.
+RecordID: SR10014
+remoteCenterServer: LVL 
+

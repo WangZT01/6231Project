@@ -1,0 +1,25 @@
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: DDO 
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: LVL 
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: DDO 
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: DDO 
+
+Create Teacher Record.
+Name: QWE QWE
+Address: QWE 
+Phone: QWEQW 
+Specialization: E 
+Location: mtl 
+Time: Sun Jul 04 17:42:57 CST 2021 
+
+

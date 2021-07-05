@@ -1,0 +1,16 @@
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: MTL 
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: LVL 
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: MTL 
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: MTL 
+

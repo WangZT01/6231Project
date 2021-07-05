@@ -1,0 +1,4 @@
+Transfer Record.
+RecordID: SR10002
+remoteCenterServer: DDO 
+

@@ -1,0 +1,47 @@
+Create Teacher Record.
+Name: Qwe Qwe
+Address: qwe 
+Phone: qwe 
+Specialization: qwe 
+Location: mtl 
+Time: Sat Jul 03 14:20:25 CST 2021 
+
+
+Create Teacher Record.
+Name: QWE QWE
+Address: QWE 
+Phone: QWE 
+Specialization: QWE 
+Location: mtl 
+Time: Sat Jul 03 14:28:55 CST 2021 
+
+
+Create Teacher Record.
+Name: QWE QWE
+Address: QWE 
+Phone: QWE 
+Specialization: QWE 
+Location: lvl 
+Time: Sat Jul 03 16:54:52 CST 2021 
+
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: MTL 
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: MTL 
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: MTL 
+
+Create Student Record.
+Name: Ttt Ttt
+CoursesRegister: ttt 
+Status: active 
+StatusDate: ttt 
+Time: Sun Jul 04 11:39:03 CST 2021 
+
+
