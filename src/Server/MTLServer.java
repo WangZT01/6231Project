@@ -41,7 +41,7 @@ public class MTLServer {
             Creator href = CreatorHelper.narrow(ref);
 
             // get the root naming context
-            // NameService invokes the name service
+            // NameService invokes the name services
             org.omg.CORBA.Object objRef =
                     orb.resolve_initial_references("NameService");
             // Use NamingContextExt which is part of the Interoperable
