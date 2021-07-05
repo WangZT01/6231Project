@@ -58,49 +58,13 @@ public class MTLServer {
             // wait for invocations from clients
             //.run();
 
-            try {
-                DatagramSocket server = null;
-                server = new DatagramSocket(5053);
-                byte[] recvBuf = new byte[1000];
-
-
-                while (true) {
-                    DatagramPacket recvPacket = new DatagramPacket(recvBuf, recvBuf.length);
-                    server.receive(recvPacket);
-                    String recvStr = new String(recvPacket.getData(), 0, recvPacket.getLength());
-                    System.out.println("Hello World!" + recvStr);
-
-                    int port = recvPacket.getPort();
-                    System.out.println(port);
-
-                    if(recvStr.startsWith("MTL")){
-
-                        System.out.println(serverImpl.load("MTL"));
-                        serverImpl.load("MTL");
-
-                    }
-                    if(recvStr.startsWith("LVL")){
-                        System.out.println(serverImpl.load("LVL"));
-                        serverImpl.load("MTL");
-                    }
-                    if(recvStr.startsWith("DDO")){
-                        System.out.println(serverImpl.load("DDO"));
-                        serverImpl.load("MTL");
-                    }
-
-                    InetAddress addr = recvPacket.getAddress();
-                    String sendStr = "5053 HELLO";
-                    byte[] sendBuf = sendStr.getBytes();
-                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, port);
-                    server.send(sendPacket);
-
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    serverImpl.UDPServer(5053);
                 }
+            }).start();
 
-            } catch (SocketException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
         catch (Exception e) {
@@ -108,41 +72,8 @@ public class MTLServer {
             e.printStackTrace(System.out);
         }
 
-        System.out.println("HelloServer Exiting ...");
+        //System.out.println("HelloServer Exiting ...");
 
-    }
-
-    public static MethodMTL loadServer() throws RemoteException {
-
-        MethodMTL methodMTL = new MethodMTL();
-
-        File MTLFile = new File("");
-        String FilePath = MTLFile.getAbsolutePath();
-        MTLFile = new File(FilePath + "\\" + "LogFile" + "\\" + "MTLFile" + "\\" + "MTLServer" + ".txt");
-        if (!MTLFile.exists()) {
-            try {
-                MTLFile.createNewFile();
-            } catch (IOException e) {
-                //e.printStackTrace();
-                System.out.println("The Map is Empty!");
-            }
-        }
-
-        try {
-
-            ObjectInputStream l_ois = null;
-            l_ois = new ObjectInputStream(new FileInputStream(FilePath + "\\" + "LogFile" + "\\" + "MTLFile" + "\\" + "MTLServer" + ".txt"));
-
-            try {
-                methodMTL = (MethodMTL) l_ois.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            //e.printStackTrace();
-            System.out.println("The Map is Empty!");
-        }
-        return methodMTL;
     }
 
 }

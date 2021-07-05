@@ -59,46 +59,12 @@ public class LVLServer {
             // wait for invocations from clients
             //orb.run();
 
-            try {
-                DatagramSocket server = null;
-                server = new DatagramSocket(5052);
-                byte[] recvBuf = new byte[1000];
-
-
-                while (true) {
-                    DatagramPacket recvPacket = new DatagramPacket(recvBuf, recvBuf.length);
-                    server.receive(recvPacket);
-                    String recvStr = new String(recvPacket.getData(), 0, recvPacket.getLength());
-                    System.out.println("Hello World!" + recvStr);
-
-                    int port = recvPacket.getPort();
-                    System.out.println(port);
-                    if(recvStr.startsWith("MTL")){
-
-                        System.out.println(serverImpl.load("MTL"));
-                        serverImpl.load("LVL");
-                    }
-                    if(recvStr.startsWith("LVL")){
-                        System.out.println(serverImpl.load("LVL"));
-                        serverImpl.load("LVL");
-                    }
-                    if(recvStr.startsWith("DDO")){
-                        System.out.println(serverImpl.load("DDO"));
-                        serverImpl.load("LVL");
-                    }
-                    InetAddress addr = recvPacket.getAddress();
-                    String sendStr = "5052 HELLO";
-                    byte[] sendBuf = sendStr.getBytes();
-                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, port);
-                    server.send(sendPacket);
-
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    serverImpl.UDPServer(5052);
                 }
-
-            } catch (SocketException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            }).start();
 
         }
 
@@ -107,7 +73,7 @@ public class LVLServer {
             e.printStackTrace(System.out);
         }
 
-        System.out.println("HelloServer Exiting ...");
+        //System.out.println("HelloServer Exiting ...");
 
     }
 

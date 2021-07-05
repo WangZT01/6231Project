@@ -58,3 +58,7 @@ StatusDate: 333
 Time: Sat Jul 03 17:00:52 CST 2021 
 
 
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: LVL 
+

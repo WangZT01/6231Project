@@ -27,4 +27,8 @@ public class Record implements Serializable {
         String Name = this.lastName;
         return Name;
     }
+    public String getFirstName(){
+        String Name = this.lastName;
+        return Name;
+    }
 }

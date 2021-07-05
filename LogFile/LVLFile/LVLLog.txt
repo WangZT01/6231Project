@@ -95,3 +95,52 @@ Sat Jul 03 17:04:52 CST 2021 - LVL1233 - transferring the record - TR10001 - Suc
 Sat Jul 03 18:05:14 CST 2021 - LVL123 - transferring the record - TR10001 - Success
 Sat Jul 03 18:11:02 CST 2021 - LVL10001 - transferring the record - TR10001 - Success
 Sat Jul 03 22:50:26 CST 2021 - LVL1233 - transferring the record - TR10001 - Success
+ManagerID: LVL1223
+Create Student Record.
+Name: RRR RRR
+CoursesRegister: RRR 
+Status: active 
+StatusDate: RR 
+Time: Sun Jul 04 11:36:54 CST 2021 
+
+
+ManagerID: LVL1233
+Create Student Record.
+Name: Ttt Ttt
+CoursesRegister: ttt 
+Status: active 
+StatusDate: ttt 
+Time: Sun Jul 04 11:39:03 CST 2021 
+
+
+ManagerID: LVL1223
+Create Student Record.
+Name: Qwe Ttt
+CoursesRegister: eee 
+Status: active 
+StatusDate: 222 
+Time: Sun Jul 04 17:44:17 CST 2021 
+
+
+Sun Jul 04 17:44:27 CST 2021 - LVL1223 - transferring the record - SR10001 - Success
+Sun Jul 04 17:48:29 CST 2021 - LVL10001 - transferring the record - 123 - Error:record not exist
+ManagerID: LVL9999
+Create Student Record.
+Name: Ttt Ttt
+CoursesRegister: eee 
+Status: active 
+StatusDate: 222 
+Time: Sun Jul 04 17:58:27 CST 2021 
+
+
+Sun Jul 04 18:12:02 CST 2021 - LVL10001 - transferring the record - TR10001 - Error:record not exist
+ManagerID: LVL9999
+Create Student Record.
+Name: Ttt Ttt
+CoursesRegister: eee 
+Status: active 
+StatusDate: 222 
+Time: Sun Jul 04 18:20:31 CST 2021 
+
+
+Sun Jul 04 18:20:55 CST 2021 - LVL10001 - transferring the record - SR10001 - Success

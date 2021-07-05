@@ -246,3 +246,14 @@ Sun Jul 04 00:28:43 CST 2021 - MTL113 - transferring the record - TR10001 - Succ
 Sun Jul 04 00:29:10 CST 2021 - MTL113 - transferring the record - TR10001 - Success
 Sun Jul 04 00:52:54 CST 2021 - MTL1223 - transferring the record - TR10001 - Success
 Sun Jul 04 00:59:37 CST 2021 - MTL123 - transferring the record - TR10001 - Success
+Sun Jul 04 10:10:56 CST 2021 - MTL1233 - transferring the record - TR10001 - Success
+ManagerID: MTL1223
+Create Student Record.
+Name: QWE QWE
+Address: QWE 
+Phone: QWEQW 
+Specialization: E 
+Location: mtl 
+Time: Sun Jul 04 17:42:57 CST 2021 
+
+

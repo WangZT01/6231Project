@@ -50,7 +50,19 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     int DDOcount = 0;
     String name = "NULL";
 
-    HashMap<String, Integer> ServerPort = new HashMap<String, Integer>();
+    static HashMap<String, Integer> ServerPort = new HashMap<String, Integer>(){};
+    static {
+        ServerPort.put("MTL", 5053);
+        ServerPort.put("LVL", 5052);
+        ServerPort.put("DDO", 5051);
+    }
+
+    static HashMap<String, Integer> clientPort = new HashMap<String, Integer>(){};
+    static {
+        clientPort.put("MTL", 6053);
+        clientPort.put("LVL", 6052);
+        clientPort.put("DDO", 6051);
+    }
 
 
     public MethodImpl(String name) throws RemoteException {
@@ -59,9 +71,6 @@ public class MethodImpl extends CreatorPOA implements Serializable{
         load("LVL");
         load("DDO");
         load("MTL");
-        ServerPort.put("MTL", 5053);
-        ServerPort.put("LVL", 5052);
-        ServerPort.put("DDO", 5051);
         this.name = name;
     }
 
@@ -208,7 +217,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
             return false;
         }
         StudentRecord NewSRecord = new StudentRecord(firstName, lastName, CoursesRegistered, Status, StatusDate);
-
+        System.out.println("toSTRING"+ NewSRecord.toString());
         ArrayList<Record> Recordlist = new ArrayList<>();
 
         String writeInLog = "ManagerID: " + managerID + "\n" +
@@ -480,39 +489,44 @@ public class MethodImpl extends CreatorPOA implements Serializable{
         else{
             //remove
             ArrayList<Record> theArrayList = null;
-            if(managerID.trim().startsWith("MTL")){
-                HashMapMTL.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
-                save("MTL");
-            }
-            else if(managerID.trim().startsWith("DDO")){
-                HashMapDDO.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
-                save("DDO");
-            }
-            else{
-                HashMapLVL.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
-                save("LVL");
+            synchronized (targetRecord){
+                if(managerID.trim().startsWith("MTL")){
+                    HashMapMTL.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
+                    save("MTL");
+                }
+                else if(managerID.trim().startsWith("DDO")){
+                    HashMapDDO.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
+                    save("DDO");
+                }
+                else{
+                    HashMapLVL.get(targetRecord.getLastName().charAt(0)).remove(targetRecord);
+                    save("LVL");
+                }
             }
 
             //add
             boolean flag = true;
             if(remoteCenterServerName.trim().startsWith("DDO")) {
-                storingRecord(targetRecord, HashMapDDO);
-                save("DDO");
-                sendUdpMessage(this.name + "Transfer Record",5051);
+                //storingRecord(targetRecord, HashMapDDO);
+                //save("DDO");
+                String sendRecord = recordJugdement(targetRecord);
+                sendUdpMessageWithRet(sendRecord,5051);
 
 
             }
             else if(remoteCenterServerName.trim().startsWith("LVL")){
-                storingRecord(targetRecord,HashMapLVL);
-                save("LVL");
-                sendUdpMessage(this.name + "Transfer Record",5052);
+                //storingRecord(targetRecord,HashMapLVL);
+                //save("LVL");
+                String sendRecord = recordJugdement(targetRecord);
+                sendUdpMessageWithRet(sendRecord,5052);
 
             }
 
             else if(remoteCenterServerName.trim().startsWith("MTL")){
-                storingRecord(targetRecord,HashMapMTL);
-                save("MTL");
-                sendUdpMessage(this.name + "Transfer Record",5053);
+                //storingRecord(targetRecord,HashMapMTL);
+                //save("MTL");
+                String sendRecord = recordJugdement(targetRecord);
+                sendUdpMessageWithRet(sendRecord,5053);
 
             }
             else
@@ -599,15 +613,33 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     @Override
     public String getRecordCounts()   {
 
-        int countLVL = getRecordCountsByInt(HashMapLVL);
-        int countDDO = getRecordCountsByInt(HashMapDDO);
-        int countMTL = getRecordCountsByInt(HashMapMTL);
 
-        String sendStrLVL = "LVL " + String.valueOf(countLVL);
-        String sendStrMTL = "MTL " + String.valueOf(countMTL);
-        String sendStrDDO = "DDO " + String.valueOf(countDDO);
+        String sendStrLVL = null;
+        String sendStrMTL = null;
+        String sendStrDDO = null;
+        if(this.name.equals("MTL")){
+            int countMTL = getRecordCountsByInt(HashMapMTL);
+            sendStrMTL = "MTL:" + String.valueOf(countMTL);
+            sendStrLVL = sendUdpMessageWithRet("getCount",ServerPort.get("LVL"));
+            sendStrDDO = sendUdpMessageWithRet("getCount",ServerPort.get("DDO"));
 
-        String sendStr =sendStrMTL + sendStrLVL + sendStrDDO;
+        }else if (this.name.equals("LVL")){
+            int countLVL = getRecordCountsByInt(HashMapLVL);
+            sendStrLVL = "LVL:" + String.valueOf(countLVL);
+            sendStrDDO = sendUdpMessageWithRet("getCount",ServerPort.get("DDO"));
+            sendStrMTL = sendUdpMessageWithRet("getCount",ServerPort.get("MTL"));
+
+        }else if (this.name.equals("DDO")){
+            int countDDO = getRecordCountsByInt(HashMapDDO);
+            sendStrDDO = "DDO:" + String.valueOf(countDDO);
+            sendStrMTL = sendUdpMessageWithRet("getCount",ServerPort.get("MTL"));
+            sendStrLVL = sendUdpMessageWithRet("getCount",ServerPort.get("LVL"));
+
+
+        }
+
+        String sendStr = sendStrMTL + " " + sendStrLVL + " " + sendStrDDO;
+
         return sendStr;
     }
 
@@ -644,21 +676,27 @@ public class MethodImpl extends CreatorPOA implements Serializable{
             if(Location.equals("LVL")){
                 l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "LVLFile" + "\\" + "LVLServer" + ".txt");
                 ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
-                l_Save.writeObject(HashMapLVL);
+                synchronized(this){
+                    l_Save.writeObject(HashMapLVL);
+                }
                 l_Save.flush();
                 l_Save.close();
             }
             else if(Location.equals("MTL")){
                 l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "MTLFile" + "\\" + "MTLServer" + ".txt");
                 ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
-                l_Save.writeObject(HashMapMTL);
+                synchronized(this){
+                    l_Save.writeObject(HashMapMTL);
+                }
                 l_Save.flush();
                 l_Save.close();
             }
             else if(Location.equals("DDO")){
                 l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "DDOServer" + ".txt");
                 ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
-                l_Save.writeObject(HashMapDDO);
+                synchronized(this){
+                    l_Save.writeObject(HashMapDDO);
+                }
                 l_Save.flush();
                 l_Save.close();
             }
@@ -729,7 +767,9 @@ public class MethodImpl extends CreatorPOA implements Serializable{
         String serverMsg = "";
         DatagramSocket clientSocket = null;
         try {
-            clientSocket = new DatagramSocket();
+            int clientP = 0;
+            clientP = clientPort.get(this.name);
+            clientSocket = new DatagramSocket(clientP);
             byte[] sendData = new byte[1000];
             sendData = message.getBytes();
             InetAddress clientHost = InetAddress.getByName("127.0.0.1");
@@ -749,36 +789,142 @@ public class MethodImpl extends CreatorPOA implements Serializable{
         return serverMsg;
     }
 
-    public void UDPServer(int port) {
-        DatagramSocket socket = null;
+    public String sendUdpMessageWithRet(String message, int serverPort) {
+        String recvStr = "";
+        DatagramSocket clientSocket = null;
         try {
-            socket = new DatagramSocket(port);
-            System.out.println("UDP Server Started at port: " + port);
-            System.out.println("Waiting for client...");
-            while (true) {
-                byte[] buffer = new byte[1000];
-                DatagramPacket request = new DatagramPacket(buffer,
-                        buffer.length);
-                socket.receive(request);
-
-                String recvStr = new String(request.getData(), 0, request.getLength());
-                System.out.println(recvStr);
 
 
-                DatagramPacket reply = new DatagramPacket(buffer,
-                        buffer.length, request.getAddress(), request.getPort());
-                socket.send(reply);
+            clientSocket = new DatagramSocket();
+            byte[] sendData = new byte[1000];
+            sendData = message.getBytes();
+            InetAddress clientHost = InetAddress.getByName("127.0.0.1");
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientHost, serverPort);
+            clientSocket.send(sendPacket);
+
+            // receiving process
+            byte[] recvBuf = new byte[1000];
+            DatagramPacket recvPacket = new DatagramPacket(recvBuf, recvBuf.length);
+            clientSocket.receive(recvPacket);
+            recvStr = new String(recvPacket.getData(), 0, recvPacket.getLength());
+            System.out.println(recvStr);
+            if(recvStr.equals("Transfer success")){
+                save(this.name);
             }
+            clientSocket.close();
+
+        } catch (SocketException e) {
+            System.out.println("Socket: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO: " + e.getMessage());
+        } finally {
+            if (clientSocket != null) {
+                clientSocket.close();
+                clientSocket = null;
+            }
+        }
+
+        return recvStr;
+    }
+
+    public void UDPServer(int port) {
+
+        try {
+            DatagramSocket server = null;
+            server = new DatagramSocket(port);
+            byte[] recvBuf = new byte[1000];
+            String sendStr = "5053 HELLO";
+
+            while (true) {
+                DatagramPacket recvPacket = new DatagramPacket(recvBuf, recvBuf.length);
+                server.receive(recvPacket);
+                String recvStr = new String(recvPacket.getData(), 0, recvPacket.getLength());
+                System.out.println(recvStr);
+                int Sendport = recvPacket.getPort();
+                if (recvStr != null && recvStr.startsWith("getCount")) {
+
+                    sendStr = getCountForUDP(recvStr);
+
+                } else if (recvStr != null && recvStr.startsWith("Transfer")) {
+                    boolean result = transferForUDP(recvStr);
+                    if(result){
+                        sendStr = "Transfer success";
+                    }else{
+                        sendStr = "Transfer fail";
+                    }
+                }
+                InetAddress addr = recvPacket.getAddress();
+
+                byte[] sendBuf = sendStr.getBytes();
+                DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, Sendport);
+                server.send(sendPacket);
+            }
+
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (socket != null) {
-                socket.close();
-                System.out.println("UDP Server Closed");
-            }
         }
     }
 
+    private String getCountForUDP(String recvStr) {
+
+        String count = null;
+        if(this.name.equals("MTL")){
+            int countMTL = getRecordCountsByInt(HashMapMTL);
+            count = "MTL " + String.valueOf(countMTL);
+            return count;
+        }
+        if(this.name.equals("LVL")){
+            int countLVL = getRecordCountsByInt(HashMapLVL);
+            count = "LVL " + String.valueOf(countLVL);
+            return count;
+        }
+        if(this.name.equals("DDO")){
+            int countDDO = getRecordCountsByInt(HashMapDDO);
+            count = "DDO " + String.valueOf(countDDO);
+            return count;
+        }
+        return count;
+    }
+
+    private boolean transferForUDP(String recvStr) {
+        String[] values = recvStr.split("&");
+        boolean result = false;
+        String SuperManager = this.name + "9999";
+        if(values[1].startsWith("T")){
+            result = this.createTRecord(SuperManager,values[2],values[3],values[4], values[5],values[6], values[7]);
+
+        }
+        else if (values[1].startsWith("S")){
+            result = this.createSRecord(SuperManager,values[2],values[3],values[4], values[5],values[6]);
+        }
+        return result;
+    }
+
+    private String recordJugdement(Record record){
+        String data = null;
+        if(record.getID().startsWith("T")){
+            System.out.println("TransferID :"+ record.getID());
+            TeacherRecord Trecord = (TeacherRecord) record;
+            data = "Transfer&" + Trecord.getID()
+                    + "&" + Trecord.getFirstName() + "&"
+                    + Trecord.getLastName() + "&"
+                    + Trecord.getAddress() + "&"
+                    + Trecord.getPhone() + "&"
+                    + Trecord.getSpecialization() + "&"
+                    + Trecord.getLocation();
+        }
+        else{
+            StudentRecord Srecord = (StudentRecord) record;
+            System.out.println("TransferID :"+ record.getID());
+            data = "Transfer&" + Srecord.getID()
+                    + "&" + Srecord.getFirstName() + "&"
+                    + Srecord.getLastName() + "&"
+                    + Srecord.getCoursesRegistered() + "&"
+                    + Srecord.getStatus() + "&"
+                    + Srecord.getStatusDate();
+        }
+        return data;
+    }
 }
