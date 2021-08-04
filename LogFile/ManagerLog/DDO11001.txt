@@ -1,0 +1,9 @@
+Create Teacher Record.
+Name: Ree Eee
+Address: eee 
+Phone: eee 
+Specialization: eee 
+Location: ddo 
+Time: Tue Aug 03 23:33:23 EDT 2021 
+
+
