@@ -33,7 +33,8 @@ public class LVLServer {
             rootpoa.the_POAManager().activate();
 
             // create servant and register it with the ORB
-            MethodImpl serverImpl = new MethodImpl("LVL");
+            MethodImplOperation serverImpl = new MethodImplOperation();
+            serverImpl.name = "LVL";
 
             serverImpl.setORB(orb);
 

@@ -567,3 +567,23 @@ StatusDate: 222
 Time: Sun Jul 04 18:20:55 CST 2021 
 
 
+ManagerID: DDO11001
+Create Student Record.
+Name: Ree Eee
+Address: eee 
+Phone: eee 
+Specialization: eee 
+Location: ddo 
+Time: Tue Aug 03 23:33:22 EDT 2021 
+
+
+ManagerID: DDO10001
+Create Student Record.
+Name: Qwe Qweq
+Address: weqwe 
+Phone: qwe 
+Specialization: qwe 
+Location: ddo 
+Time: Wed Aug 04 15:07:21 EDT 2021 
+
+

@@ -48,7 +48,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     int LVLcount = 0;
     int MTLcount = 0;
     int DDOcount = 0;
-    String name = "NULL";
+    public String name = "NULL";
 
     static HashMap<String, Integer> ServerPort = new HashMap<String, Integer>(){};
     static {
@@ -65,9 +65,9 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     }
 
 
-    public MethodImpl(String name) throws RemoteException {
+    public MethodImpl() throws RemoteException {
 
-        super();
+        //super();
         load("LVL");
         load("DDO");
         load("MTL");
@@ -827,45 +827,6 @@ public class MethodImpl extends CreatorPOA implements Serializable{
         return recvStr;
     }
 
-    public void UDPServer(int port) {
-
-        try {
-            DatagramSocket server = null;
-            server = new DatagramSocket(port);
-            byte[] recvBuf = new byte[1000];
-            String sendStr = "5053 HELLO";
-
-            while (true) {
-                DatagramPacket recvPacket = new DatagramPacket(recvBuf, recvBuf.length);
-                server.receive(recvPacket);
-                String recvStr = new String(recvPacket.getData(), 0, recvPacket.getLength());
-                System.out.println(recvStr);
-                int Sendport = recvPacket.getPort();
-                if (recvStr != null && recvStr.startsWith("getCount")) {
-
-                    sendStr = getCountForUDP(recvStr);
-
-                } else if (recvStr != null && recvStr.startsWith("Transfer")) {
-                    boolean result = transferForUDP(recvStr);
-                    if(result){
-                        sendStr = "Transfer success";
-                    }else{
-                        sendStr = "Transfer fail";
-                    }
-                }
-                InetAddress addr = recvPacket.getAddress();
-
-                byte[] sendBuf = sendStr.getBytes();
-                DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, Sendport);
-                server.send(sendPacket);
-            }
-
-        } catch (SocketException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private String getCountForUDP(String recvStr) {
 

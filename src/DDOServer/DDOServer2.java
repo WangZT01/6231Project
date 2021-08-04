@@ -1,9 +1,9 @@
-package Server;
+package DDOServer;
 
 
 import ServerModule.Creator;
 import ServerModule.CreatorHelper;
-import ServerModule.CreatorPOA;
+import frontEnd.frontendImpl;
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
@@ -11,18 +11,8 @@ import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.rmi.RemoteException;
 
-
-public class DDOServer {
+public class DDOServer2 {
 
     public static void main(String args[]) {
         try{
@@ -34,7 +24,7 @@ public class DDOServer {
             rootpoa.the_POAManager().activate();
 
             // create servant and register it with the ORB
-            MethodImpl serverImpl = new MethodImpl("DDO");
+            frontendImpl serverImpl = new frontendImpl("DDO");
 
             serverImpl.setORB(orb);
 
@@ -64,7 +54,7 @@ public class DDOServer {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    serverImpl.UDPServer(5051);
+                    serverImpl.UDPServer(5061);
                 }
             }).start();
         }

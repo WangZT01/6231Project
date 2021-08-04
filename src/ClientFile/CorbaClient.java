@@ -77,19 +77,20 @@ public class CorbaClient {
 
             if (ManagerID.startsWith("MTL")) {
                 ManagerValid = true;
-                String name = "MTL";
+                String name = "FE";
                 //通过ORB拿到server实例化好的Creator类
                 creator = CreatorHelper.narrow(ncRef.resolve_str(name));
 
+
             } else if (ManagerID.startsWith("LVL")) {
                 ManagerValid = true;
-                String name = "LVL";
+                String name = "FE";
                 //通过ORB拿到server实例化好的Creator类
                 creator = CreatorHelper.narrow(ncRef.resolve_str(name));
 
             } else if (ManagerID.startsWith("DDO")) {
                 ManagerValid = true;
-                String name = "DDO";
+                String name = "FE";
                 //通过ORB拿到server实例化好的Creator类
                 creator = CreatorHelper.narrow(ncRef.resolve_str(name));
 
