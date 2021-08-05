@@ -43,6 +43,7 @@ public class frontendImpl extends CreatorPOA implements Serializable{
     String FilePath = loggingFile.getAbsolutePath();
 
     String name = "FE";
+    String ManagerID;
 
     static HashMap<String, Integer> ServerPort = new HashMap<String, Integer>(){};
     static {
@@ -75,8 +76,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
 
     @Override
     public boolean createTRecord(String managerID, String firstName, String lastName, String address, String phone, String specialization, String location){
+        ManagerID = managerID;
         boolean flag = false;
-        String messageString = getMsgIdAndIncre() + ",1," + managerID + "," + firstName + "," + lastName + "," + address + "," + phone + "," + specialization + "," + location;
+        String messageString = "operation" + ",1," + managerID + "," + firstName + "," + lastName + "," + address + "," + phone + "," + specialization + "," + location;
         String reply = sendUdpMessageWithRet(messageString);
         if (reply.equals("SUCCESS")){
             flag = true;
@@ -86,8 +88,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
 
     @Override
     public boolean createSRecord(String managerID, String firstName, String lastName, String coursesRegistered, String status, String date) {
+        ManagerID = managerID;
         boolean flag = false;
-        String messageString = getMsgIdAndIncre() + ",2," + managerID + "," + firstName + "," + lastName + "," + coursesRegistered + "," + status + "," + date;
+        String messageString = "operation" + ",2," + managerID + "," + firstName + "," + lastName + "," + coursesRegistered + "," + status + "," + date;
         String reply = sendUdpMessageWithRet(messageString);
         if (reply.equals("SUCCESS")){
             flag = true;
@@ -99,8 +102,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
 
     @Override
     public boolean editRecord(String managerID, String recordID, String fieldName, String newValue) {
+        ManagerID = managerID;
         boolean flag = false;
-        String messageString = getMsgIdAndIncre() + ",4," + managerID + "," + recordID + "," + fieldName + "," + newValue;
+        String messageString = "operation" + ",4," + managerID + "," + recordID + "," + fieldName + "," + newValue;
         String reply = sendUdpMessageWithRet(messageString);
         if (reply.equals("SUCCESS")) {
             flag = true;
@@ -110,8 +114,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
 
     @Override
     public boolean transferRecord(String managerID, String recordID, String remoteCenterServerName){
+        ManagerID = managerID;
         boolean flag = false;
-        String messageString = getMsgIdAndIncre() + ",5," + managerID + "," + recordID + "," + remoteCenterServerName;
+        String messageString = "operation" + ",5," + managerID + "," + recordID + "," + remoteCenterServerName;
         String reply = sendUdpMessageWithRet(messageString);
         if (reply.equals("SUCCESS")) {
             flag = true;
@@ -122,7 +127,7 @@ public class frontendImpl extends CreatorPOA implements Serializable{
     @Override
     public String getRecordCounts() {
 
-        String messageString = getMsgIdAndIncre() + ",3,";
+        String messageString = "operation" + ",3,";
         sendUdpMessageWithRet(messageString);
 
         return null;
@@ -131,9 +136,10 @@ public class frontendImpl extends CreatorPOA implements Serializable{
     //Print the record to the server in the corresponding region
     @Override
     public boolean printRecord(String managerID)   {
-
+        ManagerID = managerID;
         boolean flag = false;
-        String messageString = getMsgIdAndIncre() + ",6," + managerID;
+        String messageString = "operation" + ",6," + managerID;
+        System.out.println("print order send");
         String reply = sendUdpMessageWithRet(messageString);
         if (reply.equals("SUCCESS")) {
             flag = true;
@@ -197,6 +203,8 @@ public class frontendImpl extends CreatorPOA implements Serializable{
     public String sendUdpMessageWithRet(String message) {
         String recvStr = "";
         DatagramSocket clientSocket = null;
+        int LeaderPort = 0;
+        System.out.println("ManagerID: "+ ManagerID);
         try {
 
 
@@ -204,7 +212,16 @@ public class frontendImpl extends CreatorPOA implements Serializable{
             byte[] sendData = new byte[1000];
             sendData = message.getBytes();
             InetAddress clientHost = InetAddress.getByName("127.0.0.1");
-            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientHost, 5051);
+            if(ManagerID.startsWith("DDO")){
+                LeaderPort = 5051;
+            }
+            if(ManagerID.startsWith("LVL")){
+                LeaderPort = 5052;
+            }
+            if(ManagerID.startsWith("MTL")){
+                LeaderPort = 5053;
+            }
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientHost, LeaderPort);
             clientSocket.send(sendPacket);
 
             // receiving process

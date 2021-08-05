@@ -18,7 +18,7 @@ public class MethodImplOperation extends MethodImpl {
         if (!message.equals("")) {
             byte[] reply = null;
             String[] strings = message.split(",");
-            int messageId = Integer.parseInt(strings[0]);
+            //int messageId = Integer.parseInt(strings[0]);
 
 
             String result = null;
@@ -61,51 +61,6 @@ public class MethodImplOperation extends MethodImpl {
             return "SUCCESS";
         else
             return "Fail";
-    }
-
-    public void UDPServer(int port) {
-
-        try {
-            DatagramSocket server = null;
-            server = new DatagramSocket(port);
-            byte[] recvBuf = new byte[1000];
-            String sendStr = "5053 HELLO";
-
-            while (true) {
-                DatagramPacket recvPacket = new DatagramPacket(recvBuf, recvBuf.length);
-                server.receive(recvPacket);
-                String recvStr = new String(recvPacket.getData(), 0, recvPacket.getLength());
-                System.out.println(recvStr);
-                int Sendport = recvPacket.getPort();
-
-
-                /**
-                if (recvStr != null && recvStr.startsWith("getCount")) {
-
-                    sendStr = getCountForUDP(recvStr);
-
-                } else if (recvStr != null && recvStr.startsWith("Transfer")) {
-                    boolean result = transferForUDP(recvStr);
-                    if(result){
-                        sendStr = "Transfer success";
-                    }else{
-                        sendStr = "Transfer fail";
-                    }
-                }
-                 **/
-                sendStr = operating(recvStr);
-                InetAddress addr = recvPacket.getAddress();
-
-                byte[] sendBuf = sendStr.getBytes();
-                DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, Sendport);
-                server.send(sendPacket);
-            }
-
-        } catch (SocketException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

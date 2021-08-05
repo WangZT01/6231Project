@@ -61,7 +61,7 @@ public class MTLServer {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    serverImpl.UDPServer(5053);
+                    //serverImpl.UDPServer(5053);
                 }
             }).start();
 

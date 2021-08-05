@@ -63,7 +63,7 @@ public class LVLServer {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    serverImpl.UDPServer(5052);
+                    //serverImpl.UDPServer(5052);
                 }
             }).start();
 

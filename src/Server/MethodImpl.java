@@ -108,7 +108,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
      * @throws RemoteException
      */
     @Override
-    public boolean createTRecord(String managerID, String firstName, String lastName, String Address, String Phone, String Specialization, String Location)   {
+    public synchronized boolean createTRecord(String managerID, String firstName, String lastName, String Address, String Phone, String Specialization, String Location)   {
 
         if(!(Location.equals("mtl")||Location.equals("lvl")||Location.equals("ddo"))){
             System.out.println("The location is invalid.");
@@ -210,7 +210,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
      * @throws RemoteException
      */
     @Override
-    public boolean createSRecord(String managerID, String firstName, String lastName, String CoursesRegistered, String Status, String StatusDate)   {
+    public synchronized boolean createSRecord(String managerID, String firstName, String lastName, String CoursesRegistered, String Status, String StatusDate)   {
 
         if(!(Status.equals("active")||Status.equals("inactive"))){
             System.out.println("The Status is invalid.");
@@ -298,7 +298,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
 
     //Determine whether the teacher record can be edited or changed
     @Override
-    public boolean editRecord(String managerID, String recordID, String fieldName, String newValue)   {
+    public synchronized boolean editRecord(String managerID, String recordID, String fieldName, String newValue)   {
 
         Collection<ArrayList<Record>> allRecord = new ArrayList<>();
         int mark = 0;
@@ -448,7 +448,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     }
 
     @Override
-    public boolean transferRecord(String managerID, String recordID, String remoteCenterServerName) {
+    public synchronized boolean transferRecord(String managerID, String recordID, String remoteCenterServerName) {
         Record targetRecord=null;
         Collection<ArrayList<Record>> arrayListsSet;
 
@@ -564,7 +564,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
 
     //Print the record to the server in the corresponding region
     @Override
-    public boolean printRecord(String managerID)   {
+    public synchronized boolean printRecord(String managerID)   {
 
         ArrayList<Record> Recordlist = new ArrayList<>();
         if(managerID.startsWith("MTL")){
