@@ -125,13 +125,11 @@ public class FIFOListenerThread extends Thread {
                     }
                     Sendport = recvPacket.getPort();
                 }
-                if(received.startsWith("ELECTION")){
-                    sendElectionMessage(socketNum);
-                }
-                if(received.startsWith("VOTE")){
-                    if(recvPacket.getPort() < socketNum){
-                        sendStr = "NO";
-                    }
+                if(received.startsWith("NL")){
+                    String rece = received.substring(2,6);
+                    int newleader = Integer.parseInt(rece);
+                    leaderPort = newleader;
+                    sendStr = "leader changed";
                 }
 
                 InetAddress addr = recvPacket.getAddress();
@@ -162,10 +160,18 @@ public class FIFOListenerThread extends Thread {
                 System.out.println("server1:sent election message to server2");
                 sentMessage(electionMessage,5071);
                 System.out.println("server1:sent election message to server3");
+                if (waiting()){
+                    sentMessage(this.rbp.porID, DefinePort.FE_OPEARION_PORT);
+                    setLeader(socketNum);
+                }
             }else if(socketNum<5071){
                 String electionMessage="VOTE";
                 sentMessage(electionMessage,5071);
                 System.out.println("server1:sent election message to server3");
+                if (waiting()){
+                    sentMessage(this.rbp.porID, DefinePort.FE_OPEARION_PORT);
+                    setLeader(socketNum);
+                }
             }else if(socketNum==5071){
                 sentMessage(this.rbp.porID, DefinePort.FE_OPEARION_PORT);
             }
@@ -187,11 +193,6 @@ public class FIFOListenerThread extends Thread {
             DatagramPacket replyPacket = new DatagramPacket(message, message.length, host,targetBullyPort);
             DatagramSocket datagramSocket = new DatagramSocket();
             datagramSocket.send(replyPacket);
-
-            if (waiting()){
-                sentMessage(this.rbp.porID, DefinePort.FE_OPEARION_PORT);
-                setLeader(socketNum);
-            }
 
         } catch (IOException e) {
             e.printStackTrace();

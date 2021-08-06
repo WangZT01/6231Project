@@ -56,6 +56,12 @@ public class FailureDetector extends Thread {
                 DatagramPacket heartBeat = new DatagramPacket(buffer, buffer.length);
                 datagramSocket.receive(heartBeat);
                 String source=new String(heartBeat.getData());
+                if(source.startsWith("NL")){
+                    String rece = source.substring(2,6);
+                    int newleader = Integer.parseInt(rece);
+                    primary = newleader;
+                    source = rece;
+                }
                 System.out.println("FailureDetector:  "+source.trim()+" is alive");
 
                 recording(source);
@@ -71,7 +77,8 @@ public class FailureDetector extends Thread {
 
                         if(replicasList.get(failReplicaIndex)==primary){
                             int theLastOneHeartBeat = replicasList.get(heartBeatRecords.indexOf(0));
-                            sentMessageForElection(theLastOneHeartBeat);
+                            System.out.println(theLastOneHeartBeat);
+                            sentMessageForElection(theLastOneHeartBeat-500);
                         }
 
                         //restore

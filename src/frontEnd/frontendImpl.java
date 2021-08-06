@@ -2,8 +2,6 @@ package frontEnd;
 
 
 import RecordFile.Record;
-import RecordFile.StudentRecord;
-import RecordFile.TeacherRecord;
 import ServerModule.CreatorPOA;
 import org.omg.CORBA.ORB;
 
@@ -15,7 +13,6 @@ import java.net.SocketException;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -182,7 +179,7 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                 l_Save.close();
             }
             else if(Location.equals("DDO")){
-                l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "DDOServer" + ".txt");
+                l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "ServerDDO" + ".txt");
                 ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
                 synchronized(this){
                     l_Save.writeObject(HashMapDDO);
@@ -264,25 +261,43 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                 String recvStr = new String(recvPacket.getData(), 0, recvPacket.getLength());
                 System.out.println(recvStr);
                 int Sendport = recvPacket.getPort();
-
-                if(recvStr.equals("DDO")){
-                    LeaderPORT = recvPacket.getPort();
-                    ServerPort.replace("DDO",LeaderPORT);
-                    sendStr = "New Leader";
-                }
-                else if(recvStr.equals("LVL")){
-                    LeaderPORT = recvPacket.getPort();
-                    ServerPort.replace("LVL",LeaderPORT);
-                    sendStr = "New Leader";
-                }
-                else if(recvStr.equals("MTL")){
-                    LeaderPORT = recvPacket.getPort();
-                    ServerPort.replace("MTL",LeaderPORT);
-                    sendStr = "New Leader";
-                }
-
                 InetAddress addr = recvPacket.getAddress();
 
+
+                if(recvStr.equals("DDO")){
+                    LeaderPORT = recvPacket.getPort() + 500;
+                    System.out.println("NewLeaderPORT"+ LeaderPORT);
+                    ServerPort.remove("DDO");
+                    ServerPort.put("DDO",LeaderPORT);
+                    sendStr = "NL" + LeaderPORT;
+                    Sendport = LeaderPORT;
+                    byte[] sendBuf = sendStr.getBytes();
+                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, 4555);
+                    server.send(sendPacket);
+
+                }
+                else if(recvStr.equals("LVL")){
+                    LeaderPORT = recvPacket.getPort() + 500;
+                    System.out.println("NewLeaderPORT"+ LeaderPORT);
+                    ServerPort.remove("LVL");
+                    ServerPort.put("LVL",LeaderPORT);
+                    sendStr = "NL" + LeaderPORT;
+                    Sendport = LeaderPORT;
+                    byte[] sendBuf = sendStr.getBytes();
+                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, 4556);
+                    server.send(sendPacket);
+                }
+                else if(recvStr.equals("MTL")){
+                    LeaderPORT = recvPacket.getPort() + 500;
+                    System.out.println("NewLeaderPORT"+ LeaderPORT);
+                    ServerPort.remove("MTL");
+                    ServerPort.put("MTL",LeaderPORT);
+                    sendStr = "NL" + LeaderPORT;
+                    Sendport = LeaderPORT;
+                    byte[] sendBuf = sendStr.getBytes();
+                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, 4557);
+                    server.send(sendPacket);
+                }
                 byte[] sendBuf = sendStr.getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, Sendport);
                 server.send(sendPacket);

@@ -1,10 +1,7 @@
-package DDOServer;
+package ServerDDO;
 
 
-import MYFIFO.FIFOBroadcast;
-import MYFIFO.FIFOListenerThread;
 import Replication.heartbeat.FailureDetector;
-import Replication.heartbeat.HeartBeat;
 
 import java.rmi.RemoteException;
 

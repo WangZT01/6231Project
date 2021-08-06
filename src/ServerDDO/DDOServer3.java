@@ -1,9 +1,10 @@
-package DDOServer;
+package ServerDDO;
 
 
+import Define.DefinePort;
 import MYFIFO.FIFOBroadcast;
 import MYFIFO.FIFOListenerThread;
-import Replication.heartbeat.HeartBeat;
+import Replication.election.BullyElector3;
 
 import java.rmi.RemoteException;
 
@@ -21,6 +22,8 @@ public class DDOServer3 {
         //heartBeat3.startUp();
 
         ListenerThread3.run();
+        BullyElector3 bullyElector=new BullyElector3(DefinePort.DDO_OPEARION_PORT3-500,serverImpl.name);
+        bullyElector.start();
     }
 
 

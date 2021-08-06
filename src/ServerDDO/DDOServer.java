@@ -1,26 +1,14 @@
-package DDOServer;
+package ServerDDO;
 
 
+import Define.DefinePort;
 import MYFIFO.FIFOBroadcast;
 import MYFIFO.FIFOListenerThread;
+import Replication.election.BullyElector1;
 import Replication.heartbeat.HeartBeat;
-import Server.MethodImpl;
-import Server.MethodImplOperation;
 import Server.Server;
-import ServerModule.Creator;
-import ServerModule.CreatorHelper;
-import frontEnd.frontendImpl;
-import org.omg.CORBA.ORB;
-import org.omg.CosNaming.NameComponent;
-import org.omg.CosNaming.NamingContextExt;
-import org.omg.CosNaming.NamingContextExtHelper;
-import org.omg.PortableServer.POA;
-import org.omg.PortableServer.POAHelper;
 
 import java.rmi.RemoteException;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class DDOServer extends Server {
@@ -35,6 +23,9 @@ public class DDOServer extends Server {
         FIFOBroadcast serverImpl = new FIFOBroadcast("DDO","127.0.0.1");
         FIFOListenerThread ListenerThread1 = new FIFOListenerThread(serverImpl,"127.0.0.1",5051);
         ListenerThread1.run();
+        //bully
+        BullyElector1 bullyElector=new BullyElector1(DefinePort.DDO_OPEARION_PORT1-500,"DDO");
+        bullyElector.start();
 
     }
 }

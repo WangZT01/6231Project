@@ -50,12 +50,8 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     int DDOcount = 0;
     public String name = "NULL";
 
-    static HashMap<String, Integer> ServerPort = new HashMap<String, Integer>(){};
-    static {
-        ServerPort.put("MTL", 5053);
-        ServerPort.put("LVL", 5052);
-        ServerPort.put("DDO", 5051);
-    }
+    public HashMap<String, Integer> ServerPort = new HashMap<String, Integer>(){};
+
 
     static HashMap<String, Integer> clientPort = new HashMap<String, Integer>(){};
     static {
@@ -67,7 +63,11 @@ public class MethodImpl extends CreatorPOA implements Serializable{
 
     public MethodImpl(String name) throws RemoteException {
 
+
         super();
+        ServerPort.put("MTL", 5053);
+        ServerPort.put("LVL", 5052);
+        ServerPort.put("DDO", 5051);
         this.name = name;
         load("LVL");
         load("DDO");
@@ -693,7 +693,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
                 l_Save.close();
             }
             else if(Location.equals("DDO")){
-                l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "DDOServer" + ".txt");
+                l_saveFile = new FileOutputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "ServerDDO" + ".txt");
                 ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
                 synchronized(this){
                     l_Save.writeObject(HashMapDDO);
@@ -731,7 +731,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
                 flag = true;
             }
             else if(Location.equals("DDO")){
-                l_ois = new ObjectInputStream(new FileInputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "DDOServer" + ".txt"));
+                l_ois = new ObjectInputStream(new FileInputStream(FilePath + "\\" + "LogFile" + "\\" + "DDOFile" + "\\" + "ServerDDO" + ".txt"));
                 this.HashMapDDO = (ConcurrentHashMap<Character, ArrayList<Record>>) l_ois.readObject();
                 flag = true;
             }

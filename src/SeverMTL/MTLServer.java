@@ -1,8 +1,10 @@
-package Server;
+package SeverMTL;
 
 
+import Define.DefinePort;
 import MYFIFO.FIFOBroadcast;
 import MYFIFO.FIFOListenerThread;
+import Replication.election.BullyElector1;
 import ServerModule.Creator;
 import ServerModule.CreatorHelper;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
@@ -26,13 +28,14 @@ public class MTLServer {
 
     public static void main(String args[]) throws RemoteException {
 
+
         FIFOBroadcast serverImpl = new FIFOBroadcast("MTL","127.0.0.1");
         FIFOListenerThread ListenerThread1 = new FIFOListenerThread(serverImpl,"127.0.0.1",5053);
-        FIFOListenerThread ListenerThread2 = new FIFOListenerThread(serverImpl,"127.0.0.1",5063);
-        FIFOListenerThread ListenerThread3 = new FIFOListenerThread(serverImpl,"127.0.0.1",5073);
         ListenerThread1.run();
-        ListenerThread2.run();
-        ListenerThread3.run();
+        //bully
+        BullyElector1 bullyElector=new BullyElector1(DefinePort.MTL_OPEARION_PORT1-500,"MTL");
+        bullyElector.start();
+
     }
 
 }
