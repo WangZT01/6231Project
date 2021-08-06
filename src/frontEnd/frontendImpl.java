@@ -38,19 +38,14 @@ public class frontendImpl extends CreatorPOA implements Serializable{
     ConcurrentHashMap<Character, ArrayList<Record>> HashMapMTL = new ConcurrentHashMap<Character, ArrayList<Record>>();
     ConcurrentHashMap<Character, ArrayList<Record>> HashMapLVL = new ConcurrentHashMap<Character, ArrayList<Record>>();
     ConcurrentHashMap<Character, ArrayList<Record>> HashMapDDO = new ConcurrentHashMap<Character, ArrayList<Record>>();
-
+    int LeaderPORT = 0;
     File loggingFile = new File("");
     String FilePath = loggingFile.getAbsolutePath();
 
     String name = "FE";
     String ManagerID;
 
-    static HashMap<String, Integer> ServerPort = new HashMap<String, Integer>(){};
-    static {
-        ServerPort.put("MTL", 5053);
-        ServerPort.put("LVL", 5052);
-        ServerPort.put("DDO", 5051);
-    }
+     HashMap<String, Integer> ServerPort = new HashMap<String, Integer>(){};
 
     static HashMap<String, Integer> clientPort = new HashMap<String, Integer>(){};
     static {
@@ -65,6 +60,10 @@ public class frontendImpl extends CreatorPOA implements Serializable{
 
         super();
         this.name = name;
+        ServerPort.put("MTL", 5053);
+        ServerPort.put("LVL", 5052);
+        ServerPort.put("DDO", 5051);
+
     }
 
 
@@ -201,9 +200,19 @@ public class frontendImpl extends CreatorPOA implements Serializable{
     }
 
     public String sendUdpMessageWithRet(String message) {
+        int port = 0;
+        if(ManagerID.startsWith("DDO")){
+            port = ServerPort.get("DDO");
+        }
+        if(ManagerID.startsWith("LVL")){
+            port = ServerPort.get("LVL");
+        }
+        if(ManagerID.startsWith("MTL")){
+            port = ServerPort.get("MTL");
+        }
         String recvStr = "";
         DatagramSocket clientSocket = null;
-        int LeaderPort = 0;
+
         System.out.println("ManagerID: "+ ManagerID);
         try {
 
@@ -212,16 +221,8 @@ public class frontendImpl extends CreatorPOA implements Serializable{
             byte[] sendData = new byte[1000];
             sendData = message.getBytes();
             InetAddress clientHost = InetAddress.getByName("127.0.0.1");
-            if(ManagerID.startsWith("DDO")){
-                LeaderPort = 5051;
-            }
-            if(ManagerID.startsWith("LVL")){
-                LeaderPort = 5052;
-            }
-            if(ManagerID.startsWith("MTL")){
-                LeaderPort = 5053;
-            }
-            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientHost, LeaderPort);
+
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientHost, port);
             clientSocket.send(sendPacket);
 
             // receiving process
@@ -264,7 +265,21 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                 System.out.println(recvStr);
                 int Sendport = recvPacket.getPort();
 
-                ////////////////////////////////////////
+                if(recvStr.equals("DDO")){
+                    LeaderPORT = recvPacket.getPort();
+                    ServerPort.replace("DDO",LeaderPORT);
+                    sendStr = "New Leader";
+                }
+                else if(recvStr.equals("LVL")){
+                    LeaderPORT = recvPacket.getPort();
+                    ServerPort.replace("LVL",LeaderPORT);
+                    sendStr = "New Leader";
+                }
+                else if(recvStr.equals("MTL")){
+                    LeaderPORT = recvPacket.getPort();
+                    ServerPort.replace("MTL",LeaderPORT);
+                    sendStr = "New Leader";
+                }
 
                 InetAddress addr = recvPacket.getAddress();
 

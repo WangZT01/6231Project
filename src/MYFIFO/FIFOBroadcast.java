@@ -1,7 +1,6 @@
 package MYFIFO;
 
-import FIFO.Message;
-import FIFO.ReliableBroadcastProcess;
+
 import Server.MethodImplOperation;
 
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class FIFOBroadcast extends MethodImplOperation
     //Connection details for this implementation.
     private InetAddress address;
     private DatagramSocket socket;
-    private static int SOCKET = 4446;
+    //private static int SOCKET = 4446;
     /**
      Constructor
      */

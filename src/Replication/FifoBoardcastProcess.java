@@ -1,7 +1,6 @@
 package Replication;
 
 import Replication.election.electionThread;
-import Replication.heartbeat.HeartbeatListenerThread;
 
 import java.io.BufferedReader;
         import java.io.IOException;
@@ -33,7 +32,7 @@ public class FifoBoardcastProcess
 
     protected List<Message> msgBag;
     protected Map<String, Integer> messageSeqMap;
-    protected HeartbeatListenerThread heartbeatListenerThread;
+    //protected HeartbeatListenerThread heartbeatListenerThread;
     protected electionThread electionThread;
 
     private String header = "null";
@@ -178,8 +177,8 @@ public class FifoBoardcastProcess
     }
 
     protected  void startHeartbeatThread(){
-        heartbeatListenerThread = new HeartbeatListenerThread(this);
-        heartbeatListenerThread.start();
+        //heartbeatListenerThread = new HeartbeatListenerThread(this);
+        //heartbeatListenerThread.start();
     }
 
     // This method can parse the received messages and parse them.
@@ -200,9 +199,9 @@ public class FifoBoardcastProcess
         return electionThread;
     }
 
-    public HeartbeatListenerThread getHeartbeatThread() {
+    /*public HeartbeatListenerThread getHeartbeatThread() {
         return heartbeatListenerThread;
-    }
+    }*/
 
 
 }
