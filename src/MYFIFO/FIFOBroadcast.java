@@ -36,12 +36,12 @@ public class FIFOBroadcast extends MethodImplOperation
      Constructor
      */
     public FIFOBroadcast(String ID,String groupAddress) throws RemoteException {
-        super();
+        super(ID);
         porID = ID;
         messages = new LinkedBlockingQueue<String>();
         try
         {
-            socket = new DatagramSocket(SOCKET);
+            socket = new DatagramSocket();
             address = InetAddress.getByName(groupAddress);
             //socket.joinGroup(address);
         }
@@ -61,7 +61,7 @@ public class FIFOBroadcast extends MethodImplOperation
     }
 
 
-    public void receive(String m) throws IOException {
+    public void receive(String m,int leaderport) throws IOException {
         //If the message has been received before, it is then ignored.
         if (!messages.contains(m))
         {
@@ -71,12 +71,12 @@ public class FIFOBroadcast extends MethodImplOperation
 
             //Note that the message is relayed to all processes
             // before it is delivered.
-            sendToAll();
+            sendToAll(leaderport);
 
         }
     }
 
-    public void sendToAll() throws IOException {
+    public void sendToAll(int leaderport) throws IOException {
         int DDO_Leader_Port = 5051;
         String m = messages.poll();
         String receStr = null;
@@ -84,7 +84,31 @@ public class FIFOBroadcast extends MethodImplOperation
         if(this.porID.equals("DDO")){
             int port  = 5051;
             for (int i = 0; i < 3; i++) {
-
+                if(port == leaderport){
+                    continue;
+                }
+                DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
+                socket.send(packet);
+                port = port + 10;
+            }
+        }
+        if(this.porID.equals("LVL")){
+            int port  = 5052;
+            for (int i = 0; i < 3; i++) {
+                if(port == leaderport){
+                    continue;
+                }
+                DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
+                socket.send(packet);
+                port = port + 10;
+            }
+        }
+        if(this.porID.equals("MTL")){
+            int port  = 5053;
+            for (int i = 0; i < 3; i++) {
+                if(port == leaderport){
+                    continue;
+                }
                 DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
                 socket.send(packet);
                 port = port + 10;

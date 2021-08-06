@@ -18,13 +18,8 @@ import org.omg.PortableServer.POAHelper;
 import java.rmi.RemoteException;
 
 
-public class DDOServer extends MethodImpl {
+public class DDOServer  {
 
-    public DDOServer() throws RemoteException {
-        super();
-        name = this.getClass().getName();
-        System.out.println(name);
-    }
 
     public static void main(String args[]) throws RemoteException {
 

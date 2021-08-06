@@ -106,9 +106,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
         boolean flag = false;
         String messageString = "operation" + ",4," + managerID + "," + recordID + "," + fieldName + "," + newValue;
         String reply = sendUdpMessageWithRet(messageString);
-        if (reply.equals("SUCCESS")) {
-            flag = true;
-        }
+
+        System.out.println(reply);
+        flag = true;
         return flag;
     }
 
@@ -128,9 +128,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
     public String getRecordCounts() {
 
         String messageString = "operation" + ",3,";
-        sendUdpMessageWithRet(messageString);
+        String result = sendUdpMessageWithRet(messageString);
 
-        return null;
+        return result;
     }
 
     //Print the record to the server in the corresponding region

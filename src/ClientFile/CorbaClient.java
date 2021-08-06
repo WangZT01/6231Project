@@ -199,7 +199,8 @@ public class CorbaClient {
                         // get record count
                         case 3:
 
-                            System.out.println(creator.getRecordCounts());
+                            String getresult  = creator.getRecordCounts();
+                            System.out.println(getresult);
                             break;
 
                         //edit record

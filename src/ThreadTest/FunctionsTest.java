@@ -25,7 +25,7 @@ public class FunctionsTest {
     @Before
     public void before(){
         try {
-            methodImpl = new MethodImpl();
+            methodImpl = new MethodImpl("MTL");
             methodImpl.name = "MTL";
             methodImpl.load("MTL");
         } catch (IOException e) {

@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.HashMap;
 
 
 /**
@@ -20,6 +21,7 @@ public class FIFOListenerThread extends Thread {
     //Network connection details.
     private int socketNum;
     private String address;
+    private int leaderPort;
 
     /**
      Constructor.
@@ -33,6 +35,15 @@ public class FIFOListenerThread extends Thread {
         this.rbp = rbp;
         this.address = address;
         this.socketNum = socketNum;
+        if(rbp.porID.equals("DDO")){
+            leaderPort = 5051;
+        }
+        if(rbp.porID.equals("LVL")){
+            leaderPort = 5052;
+        }
+        if(rbp.porID.equals("MTL")){
+            leaderPort = 5053;
+        }
     }
 
     /**
@@ -59,10 +70,28 @@ public class FIFOListenerThread extends Thread {
                 server.receive(recvPacket);
                 String received = new String(recvPacket.getData(), 0, recvPacket.getLength());
                 //The message is passed to the RB process here.
+                System.out.println(received);
                 if(received.startsWith("operation")){
-                    rbp.receive(received);
+                    if(leaderPort == socketNum){
+                        rbp.receive(received,leaderPort);
+                        Sendport = recvPacket.getPort();
+                        sendStr = rbp.operating(received);
+                    }
+                }
+                if (received != null && received.startsWith("getCount")) {
+
+                    sendStr = rbp.getCountForUDP(received);
                     Sendport = recvPacket.getPort();
-                    sendStr = rbp.operating(received);
+                    System.out.println("sendStr : "+ sendStr);
+
+                } else if (received != null && received.startsWith("Transfer")) {
+                    boolean result = rbp.transferForUDP(received);
+                    if(result){
+                        sendStr = "Transfer success";
+                    }else{
+                        sendStr = "Transfer fail";
+                    }
+                    Sendport = recvPacket.getPort();
                 }
                 InetAddress addr = recvPacket.getAddress();
                 byte[] sendBuf = sendStr.getBytes();
@@ -76,4 +105,7 @@ public class FIFOListenerThread extends Thread {
         }
     }
 
+    public void setLeader(int leaderPort) {
+        this.leaderPort = leaderPort;
+    }
 }

@@ -79,3 +79,7 @@ Location: ddo
 Time: Wed Aug 04 15:07:21 EDT 2021 
 
 
+Transfer Record.
+RecordID: TR10002
+remoteCenterServer: MTL 
+

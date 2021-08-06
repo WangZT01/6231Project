@@ -587,3 +587,4 @@ Location: ddo
 Time: Wed Aug 04 15:07:21 EDT 2021 
 
 
+Thu Aug 05 23:31:17 EDT 2021 - DDO10001 - transferring the record - TR10002 - Success

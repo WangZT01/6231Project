@@ -65,9 +65,10 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     }
 
 
-    public MethodImpl() throws RemoteException {
+    public MethodImpl(String name) throws RemoteException {
 
-        //super();
+        super();
+        this.name = name;
         load("LVL");
         load("DDO");
         load("MTL");
@@ -613,7 +614,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     @Override
     public String getRecordCounts()   {
 
-
+        System.out.println("getRecordCounts" + name);
         String sendStrLVL = null;
         String sendStrMTL = null;
         String sendStrDDO = null;
@@ -763,32 +764,6 @@ public class MethodImpl extends CreatorPOA implements Serializable{
         }
     }
 
-    public String sendUdpMessage(String message, int serverPort) {
-        String serverMsg = "";
-        DatagramSocket clientSocket = null;
-        try {
-            int clientP = 0;
-            clientP = clientPort.get(this.name);
-            clientSocket = new DatagramSocket(clientP);
-            byte[] sendData = new byte[1000];
-            sendData = message.getBytes();
-            InetAddress clientHost = InetAddress.getByName("127.0.0.1");
-            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, clientHost, serverPort);
-            clientSocket.send(sendPacket);
-
-        } catch (SocketException e) {
-            System.out.println("Socket: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("IO: " + e.getMessage());
-        } finally {
-            if (clientSocket != null) {
-                clientSocket.close();
-                clientSocket = null;
-            }
-        }
-        return serverMsg;
-    }
-
     public String sendUdpMessageWithRet(String message, int serverPort) {
         String recvStr = "";
         DatagramSocket clientSocket = null;
@@ -828,28 +803,31 @@ public class MethodImpl extends CreatorPOA implements Serializable{
     }
 
 
-    private String getCountForUDP(String recvStr) {
-
+    public String getCountForUDP(String recvStr) {
+        System.out.println("NAME:" + name);
         String count = null;
         if(this.name.equals("MTL")){
             int countMTL = getRecordCountsByInt(HashMapMTL);
             count = "MTL " + String.valueOf(countMTL);
+            System.out.println(count);
             return count;
         }
         if(this.name.equals("LVL")){
             int countLVL = getRecordCountsByInt(HashMapLVL);
             count = "LVL " + String.valueOf(countLVL);
+            System.out.println(count);
             return count;
         }
         if(this.name.equals("DDO")){
             int countDDO = getRecordCountsByInt(HashMapDDO);
             count = "DDO " + String.valueOf(countDDO);
+            System.out.println(count);
             return count;
         }
         return count;
     }
 
-    private boolean transferForUDP(String recvStr) {
+    public boolean transferForUDP(String recvStr) {
         String[] values = recvStr.split("&");
         boolean result = false;
         String SuperManager = this.name + "9999";

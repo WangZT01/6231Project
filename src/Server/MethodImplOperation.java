@@ -10,8 +10,8 @@ import java.rmi.RemoteException;
 public class MethodImplOperation extends MethodImpl {
 
 
-    public MethodImplOperation() throws RemoteException {
-        super();
+    public MethodImplOperation(String name) throws RemoteException {
+        super(name);
     }
 
     public String operating(String message){
@@ -33,6 +33,7 @@ public class MethodImplOperation extends MethodImpl {
                     break;
                 case "3":
                         result = this.getRecordCounts();
+                        System.out.println("getRecordCounts: " + result);
                         break;
                 case "4":
                     flag = this.editRecord(strings[2], strings[3], strings[4], strings[5]);

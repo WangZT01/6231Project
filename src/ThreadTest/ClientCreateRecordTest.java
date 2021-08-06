@@ -33,7 +33,7 @@ public class ClientCreateRecordTest {
 
     public void run() throws RemoteException {
 
-        MethodImpl testMethodImpl = new MethodImpl();
+        MethodImpl testMethodImpl = new MethodImpl("MTL");
         testMethodImpl.name = "MTL";
         final ConcurrentHashMap<Integer, ThreadRecord> records = new ConcurrentHashMap<Integer, ThreadRecord>();
 

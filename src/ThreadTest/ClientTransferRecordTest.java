@@ -39,7 +39,7 @@ public class ClientTransferRecordTest {
 
     public void run() throws RemoteException {
 
-        MethodImpl testMethodImpl = new MethodImpl();
+        MethodImpl testMethodImpl = new MethodImpl("LVL");
         testMethodImpl.name = "LVL";
         //testMethodImpl.createTRecord("DDO9999","test", "clientNum" + clientNum, "Add", "4008517517", "Spec", "ddo");
         final ConcurrentHashMap<Integer, ThreadRecord> records = new ConcurrentHashMap<Integer, ThreadRecord>();
