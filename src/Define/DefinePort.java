@@ -21,6 +21,9 @@ public class DefinePort {
 
     public static final int MTL_CLIENT_PORT=6053;
 
+    private static final String separator = ";";
 
-
+    public static String getSeparator() {
+        return separator;
+    }
 }
