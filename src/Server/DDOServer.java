@@ -1,4 +1,4 @@
-package DDOServer;
+package Server;
 
 
 import MYFIFO.FIFOBroadcast;
