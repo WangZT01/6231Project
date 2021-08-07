@@ -83,3 +83,24 @@ Transfer Record.
 RecordID: TR10002
 remoteCenterServer: MTL 
 
+Create Teacher Record.
+Name: Qwe Qwe
+Address: qweq 
+Phone: weqwe 
+Specialization: qwe 
+Location: mtl 
+Time: Fri Aug 06 23:20:56 EDT 2021 
+
+
+Transfer Record.
+RecordID: TR10001
+remoteCenterServer: LVL 
+
+Create Student Record.
+Name: Eee Eee
+CoursesRegister: eee 
+Status: active 
+StatusDate: 333 
+Time: Sat Aug 07 00:45:56 EDT 2021 
+
+

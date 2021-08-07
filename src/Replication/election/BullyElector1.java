@@ -44,15 +44,24 @@ public class BullyElector1 extends Thread{
                         sentMessage("NO",bullyMessage.getPort());
 
                     String electionMessage="ELECTION";
-                    sentMessage(electionMessage,myBullyPort+20);
+                    int port3 = myBullyPort+20;
+                    int port2 = myBullyPort+10;
+                    sentMessage(electionMessage,port3);
                     System.out.println("server1:sent election message to server3");
-                    sentMessage(electionMessage,myBullyPort+10);
+                    sentMessage(electionMessage,port2);
                     System.out.println("server1:sent election message to server2");
 
                     if (waiting()){
                         sentMessage(Servername,DefinePort.FE_OPEARION_PORT);
+                        String LPORT = String.valueOf(myBullyPort + 500);
+                        //sentMessage("NL" + LPORT,myBullyPort+500);
+                        port2 = port2 + 500;
+                        port3 = port3 + 500;
+                        sentMessage("NL" + LPORT,port2);
+                        sentMessage("NL" + LPORT,port3);
                     }
                 }
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -102,10 +111,10 @@ public class BullyElector1 extends Thread{
         //bully
         BullyElector1 bullyElector=new BullyElector1(DefinePort.DDO_OPEARION_PORT1-500,"DDO");
         bullyElector.start();
-//        BullyElector1 bullyElector2=new BullyElector1(DefinePort.LVL_OPEARION_PORT1-500,"LVL");
-//        bullyElector2.start();
-//        BullyElector1 bullyElector3=new BullyElector1(DefinePort.MTL_OPEARION_PORT1-500,"MTL");
-//        bullyElector3.start();
+        BullyElector1 bullyElector2=new BullyElector1(DefinePort.LVL_OPEARION_PORT1-500,"LVL");
+        bullyElector2.start();
+        BullyElector1 bullyElector3=new BullyElector1(DefinePort.MTL_OPEARION_PORT1-500,"MTL");
+        bullyElector3.start();
 
     }
 }

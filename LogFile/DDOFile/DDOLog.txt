@@ -588,3 +588,23 @@ Time: Wed Aug 04 15:07:21 EDT 2021
 
 
 Thu Aug 05 23:31:17 EDT 2021 - DDO10001 - transferring the record - TR10002 - Success
+ManagerID: DDO10001
+Create Student Record.
+Name: Qwe Qwe
+Address: qweq 
+Phone: weqwe 
+Specialization: qwe 
+Location: mtl 
+Time: Fri Aug 06 23:20:56 EDT 2021 
+
+
+Sat Aug 07 00:45:02 EDT 2021 - DDO10001 - transferring the record - TR10001 - Success
+ManagerID: DDO10001
+Create Student Record.
+Name: Eee Eee
+CoursesRegister: eee 
+Status: active 
+StatusDate: 333 
+Time: Sat Aug 07 00:45:56 EDT 2021 
+
+

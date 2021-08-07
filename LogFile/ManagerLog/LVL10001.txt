@@ -6,3 +6,12 @@ Transfer Record.
 RecordID: SR10001
 remoteCenterServer: DDO 
 
+Create Teacher Record.
+Name: Rrr Rrr
+Address: rrr 
+Phone: rrr 
+Specialization: rrr 
+Location: lvl 
+Time: Sat Aug 07 00:28:54 EDT 2021 
+
+

@@ -1,6 +1,7 @@
 package frontEnd;
 
 
+import Define.DefinePort;
 import RecordFile.Record;
 import ServerModule.CreatorPOA;
 import org.omg.CORBA.ORB;
@@ -207,6 +208,7 @@ public class frontendImpl extends CreatorPOA implements Serializable{
         if(ManagerID.startsWith("MTL")){
             port = ServerPort.get("MTL");
         }
+        System.out.println("send port" + port);
         String recvStr = "";
         DatagramSocket clientSocket = null;
 
@@ -269,10 +271,11 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                     System.out.println("NewLeaderPORT"+ LeaderPORT);
                     ServerPort.remove("DDO");
                     ServerPort.put("DDO",LeaderPORT);
-                    sendStr = "NL" + LeaderPORT;
+                    sendStr = "NL" + String.valueOf(LeaderPORT);
+                    System.out.println("frontend sendStr"+sendStr);
                     Sendport = LeaderPORT;
                     byte[] sendBuf = sendStr.getBytes();
-                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, 4555);
+                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, DefinePort.DDO_FD_PORT);
                     server.send(sendPacket);
 
                 }
@@ -281,10 +284,10 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                     System.out.println("NewLeaderPORT"+ LeaderPORT);
                     ServerPort.remove("LVL");
                     ServerPort.put("LVL",LeaderPORT);
-                    sendStr = "NL" + LeaderPORT;
+                    sendStr = "NL" + String.valueOf(LeaderPORT);
                     Sendport = LeaderPORT;
                     byte[] sendBuf = sendStr.getBytes();
-                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, 4556);
+                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, DefinePort.LVL_FD_PORT);
                     server.send(sendPacket);
                 }
                 else if(recvStr.equals("MTL")){
@@ -292,10 +295,10 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                     System.out.println("NewLeaderPORT"+ LeaderPORT);
                     ServerPort.remove("MTL");
                     ServerPort.put("MTL",LeaderPORT);
-                    sendStr = "NL" + LeaderPORT;
+                    sendStr = "NL" + String.valueOf(LeaderPORT);
                     Sendport = LeaderPORT;
                     byte[] sendBuf = sendStr.getBytes();
-                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, 4557);
+                    DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, DefinePort.MTL_FD_PORT);
                     server.send(sendPacket);
                 }
                 byte[] sendBuf = sendStr.getBytes();

@@ -14,6 +14,7 @@ public class DefinePort {
     public static final int DDO_OPEARION_PORT1=5051;
     public static final int DDO_OPEARION_PORT2=5061;
     public static final int DDO_OPEARION_PORT3=5071;
+    public static final int DDO_FD_PORT=6001;
 
     public static final int DDO_ELECTION_PORT=6001;
 
@@ -21,11 +22,13 @@ public class DefinePort {
     public static final int LVL_OPEARION_PORT1=5052;
     public static final int LVL_OPEARION_PORT2=5062;
     public static final int LVL_OPEARION_PORT3=5072;
+    public static final int LVL_FD_PORT=6002;
 
     public static final int MTL_CLIENT_PORT=6053;
     public static final int MTL_OPEARION_PORT1=5053;
     public static final int MTL_OPEARION_PORT2=5063;
     public static final int MTL_OPEARION_PORT3=5073;
+    public static final int MTL_FD_PORT=6003;
 
     private static final String separator = ";";
 

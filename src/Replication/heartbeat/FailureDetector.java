@@ -13,7 +13,7 @@ public class FailureDetector extends Thread {
 
     private ArrayList<Integer> replicasList;
     private ArrayList<Integer> heartBeatRecords;
-    private int FD_PORT = DefinePort.FailureDetector;     //failureDetector special FD_PORT
+    private int FD_PORT = 6001;     //failureDetector special FD_PORT
     private int runsTolerant=2;
     private int primary= 5051;
     private String ServerName;
@@ -22,10 +22,12 @@ public class FailureDetector extends Thread {
     private InetAddress inetAddress=null;
 
 
-    public FailureDetector(String ServerName){
+    public FailureDetector(String ServerName, int DF_PORT , int primary){
         this.replicasList=new ArrayList<Integer>();
         this.heartBeatRecords=new ArrayList<Integer>();
         this.ServerName = ServerName;
+        this.FD_PORT = DF_PORT;
+        this.primary = primary;
     }
 
     public void addServer(int portNo){
@@ -55,13 +57,16 @@ public class FailureDetector extends Thread {
             while(true){
                 DatagramPacket heartBeat = new DatagramPacket(buffer, buffer.length);
                 datagramSocket.receive(heartBeat);
-                String source=new String(heartBeat.getData());
+                String source=new String(heartBeat.getData(), 0, heartBeat.getLength());
+                //System.out.println("source" + source);
                 if(source.startsWith("NL")){
                     String rece = source.substring(2,6);
                     int newleader = Integer.parseInt(rece);
-                    System.out.println("New Leader:" + rece);
+                    System.out.println("New Leader:" + newleader);
                     primary = newleader;
                     source = rece;
+                    //System.out.println("NLsource" + source);
+                    continue;
                 }
                 System.out.println("FailureDetector:  "+source.trim()+" is alive");
 

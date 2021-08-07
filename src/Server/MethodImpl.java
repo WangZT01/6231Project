@@ -769,7 +769,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
         DatagramSocket clientSocket = null;
         try {
 
-
+            System.out.println("modidiserverPort" + serverPort);
             clientSocket = new DatagramSocket();
             byte[] sendData = new byte[1000];
             sendData = message.getBytes();

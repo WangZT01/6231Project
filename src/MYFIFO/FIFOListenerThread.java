@@ -21,7 +21,7 @@ public class FIFOListenerThread extends Thread {
     //Network connection details.
     private int socketNum;
     private String address;
-    private int leaderPort;
+    private boolean leaderPort = false;
     private HeartBeat heartBeat;
     private ArrayList<Integer> DDOport;
     private ArrayList<Integer> LVLport;
@@ -55,14 +55,14 @@ public class FIFOListenerThread extends Thread {
         this.rbp = rbp;
         this.address = address;
         this.socketNum = socketNum;
-        if(rbp.porID.equals("DDO")){
-            leaderPort = 5051;
+        if(rbp.porID.equals("DDO")&&(socketNum == 5051)){
+            leaderPort = true;
         }
-        if(rbp.porID.equals("LVL")){
-            leaderPort = 5052;
+        if(rbp.porID.equals("LVL")&&(socketNum == 5052)){
+            leaderPort = true;
         }
-        if(rbp.porID.equals("MTL")){
-            leaderPort = 5053;
+        if(rbp.porID.equals("MTL")&&(socketNum == 5053)){
+            leaderPort = true;
         }
         heartBeat = new HeartBeat(this.socketNum,rbp.name);
         //heartBeat.startUp();
@@ -80,7 +80,7 @@ public class FIFOListenerThread extends Thread {
         UDPServer();
     }
 
-    public void setLeader(int leaderPort) {
+    public void setLeader(boolean leaderPort) {
         this.leaderPort = leaderPort;
     }
 
@@ -104,8 +104,8 @@ public class FIFOListenerThread extends Thread {
                 //The message is passed to the RB process here.
                 System.out.println(received);
                 if(received.startsWith("operation")){
-                    if(leaderPort == socketNum){
-                        rbp.receive(received,leaderPort);
+                    if(leaderPort){
+                        rbp.receive(received,socketNum);
                         Sendport = recvPacket.getPort();
                         sendStr = rbp.operating(received);
                     }
@@ -127,11 +127,17 @@ public class FIFOListenerThread extends Thread {
                 }
                 //NewLeader
                 if(received.startsWith("NL")){
+                    System.out.println("received" + received);
                     String rece = received.substring(2,6);
                     int newleader = Integer.parseInt(rece);
-                    leaderPort = newleader;
+                    if(newleader != socketNum){
+                        leaderPort= false;
+                    }else{
+                        leaderPort = true;
+                    }
+                    rbp.ServerPort.replace(rbp.name,newleader);
                     sendStr = "leader changed";
-                    System.out.println("New Leader:" + rece);
+                    System.out.println("New Leader:" + newleader);
                 }
 
                 InetAddress addr = recvPacket.getAddress();
@@ -146,46 +152,6 @@ public class FIFOListenerThread extends Thread {
         {
             e.printStackTrace();
         }
-    }
-
-    private void sendElectionMessage(int socketNum) throws UnknownHostException {
-
-        String result = null;
-        int l_leaderPort = this.leaderPort;
-        if(this.rbp.porID.equals("DDO")){
-
-            //DDOport.remove(l_leaderPort);
-            //for (int i = 0; i < DDOport.size(); i++) { }
-            if(socketNum<5061){
-                String electionMessage="VOTE";
-                sentMessage(electionMessage,5061);
-                System.out.println("server1:sent election message to server2");
-                sentMessage(electionMessage,5071);
-                System.out.println("server1:sent election message to server3");
-                if (waiting()){
-                    sentMessage(this.rbp.porID, DefinePort.FE_OPEARION_PORT);
-                    setLeader(socketNum);
-                }
-            }else if(socketNum<5071){
-                String electionMessage="VOTE";
-                sentMessage(electionMessage,5071);
-                System.out.println("server1:sent election message to server3");
-                if (waiting()){
-                    sentMessage(this.rbp.porID, DefinePort.FE_OPEARION_PORT);
-                    setLeader(socketNum);
-                }
-            }else if(socketNum==5071){
-                sentMessage(this.rbp.porID, DefinePort.FE_OPEARION_PORT);
-            }
-        }
-        else if(this.rbp.porID.equals("LVL")){
-
-        }
-        else if(this.rbp.porID.equals("MTL")){
-
-        }
-
-        //return result;
     }
 
     public void sentMessage(String content, int targetBullyPort) throws UnknownHostException {

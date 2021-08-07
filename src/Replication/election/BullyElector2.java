@@ -43,11 +43,20 @@ public class BullyElector2 extends Thread{
                         sentMessage("NO",bullyMessage.getPort());
 
                     String electionMessage="ELECTION";
-                    sentMessage(electionMessage,myBullyPort+10);
+                    int port3 = myBullyPort+10;
+                    int port1 = myBullyPort-10;
+                    sentMessage(electionMessage,port3);
                     System.out.println("server2:sent election message to server3");
 
                     if (waiting()){
                         sentMessage(Servername, DefinePort.FE_OPEARION_PORT);
+                        int p = myBullyPort + 500;
+                        String LPORT = "NL" + String.valueOf(p);
+                        port3 = port3 + 500;
+                        port1 = port1 + 500;
+                        //sentMessage("NL" + LPORT,(myBullyPort+500));
+                        sentMessage(LPORT,port1);
+                        sentMessage(LPORT,port3);
                     }
                 }
             }
@@ -85,6 +94,8 @@ public class BullyElector2 extends Thread{
                 datagramSocket.receive(message);
                 if(message.getPort()>myBullyPort)
                     flag=false;
+                String mess=new String(message.getData());
+                System.out.println(mess);
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -97,10 +108,10 @@ public class BullyElector2 extends Thread{
         //bully
         BullyElector2 bullyElector=new BullyElector2(DefinePort.DDO_OPEARION_PORT2-500,"DDO");
         bullyElector.start();
-//        BullyElector2 bullyElector2=new BullyElector2(DefinePort.LVL_OPEARION_PORT2-500,"LVL");
-//        bullyElector2.start();
-//        BullyElector2 bullyElector3=new BullyElector2(DefinePort.MTL_OPEARION_PORT2-500,"MTL");
-//        bullyElector3.start();
+        BullyElector2 bullyElector2=new BullyElector2(DefinePort.LVL_OPEARION_PORT2-500,"LVL");
+        bullyElector2.start();
+        BullyElector2 bullyElector3=new BullyElector2(DefinePort.MTL_OPEARION_PORT2-500,"MTL");
+        bullyElector3.start();
 
     }
 }
