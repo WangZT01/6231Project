@@ -135,9 +135,9 @@ public class FIFOListenerThread extends Thread {
                     }else{
                         leaderPort = true;
                     }
-                    rbp.ServerPort.replace(rbp.name,newleader);
+                    String srt  = rbp.changeLeader(newleader);
                     sendStr = "leader changed";
-                    System.out.println("New Leader:" + newleader);
+                    System.out.println(srt);
                 }
 
                 InetAddress addr = recvPacket.getAddress();

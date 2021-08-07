@@ -608,3 +608,62 @@ StatusDate: 333
 Time: Sat Aug 07 00:45:56 EDT 2021 
 
 
+ManagerID: DDO10001
+Create Student Record.
+Name: Qwe Qweqw
+Address: e 
+Phone: e 
+Specialization: e 
+Location: ddo 
+Time: Sat Aug 07 09:47:09 EDT 2021 
+
+
+ManagerID: DDO10001
+Create Student Record.
+Name: Eee Eee
+Address: eee 
+Phone: eee 
+Specialization: eee 
+Location: ddo 
+Time: Sat Aug 07 09:58:31 EDT 2021 
+
+
+ManagerID: DDO10001
+Create Student Record.
+Name: Eee Eee
+Address: eee 
+Phone: eee 
+Specialization: eee 
+Location: ddo 
+Time: Sat Aug 07 10:01:57 EDT 2021 
+
+
+ManagerID: DDO10001
+Create Student Record.
+Name: Yyy Yyy
+CoursesRegister: yyy 
+Status: active 
+StatusDate: ttt 
+Time: Sat Aug 07 11:22:30 EDT 2021 
+
+
+ManagerID: DDO10001
+Create Student Record.
+Name: Hhh Hhh
+Address: hhh 
+Phone: hhh 
+Specialization: hhh 
+Location: mtl 
+Time: Sat Aug 07 11:25:57 EDT 2021 
+
+
+ManagerID: DDO10001
+Create Student Record.
+Name: QQQ QQQ
+Address: QQQ 
+Phone: QQQ 
+Specialization: QQQ 
+Location: ddo 
+Time: Sat Aug 07 11:41:32 EDT 2021 
+
+

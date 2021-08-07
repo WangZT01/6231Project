@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.MulticastSocket;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -114,6 +113,28 @@ public class FIFOBroadcast extends MethodImplOperation
             }
         }
     }
+
+    public String changeLeader(int newleader){
+        String str = null;
+        if((newleader == 5051) || (newleader == 5061) || (newleader == 5071)){
+            ServerPort.remove("DDO");
+            ServerPort.put("DDO",newleader);
+            str = "NEW DDO leader: " + String.valueOf(ServerPort.get("DDO"));
+        }
+        if((newleader == 5052) || (newleader == 5062) && (newleader == 5072)){
+            ServerPort.remove("LVL");
+            ServerPort.put("LVL",newleader);
+            str = "NEW LVL leader: " + String.valueOf(ServerPort.get("LVL"));
+        }
+        if((newleader == 5053) || (newleader == 5063) || (newleader == 5073)){
+            ServerPort.remove("MTL");
+            ServerPort.put("MTL",newleader);
+            str = "NEW MTL leader: " + String.valueOf(ServerPort.get("MTL"));
+        }
+
+        return str;
+    }
+
 
 
 }

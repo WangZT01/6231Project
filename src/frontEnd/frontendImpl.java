@@ -277,6 +277,8 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                     byte[] sendBuf = sendStr.getBytes();
                     DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, DefinePort.DDO_FD_PORT);
                     server.send(sendPacket);
+                    sentMessageForNewLeader(sendStr,ServerPort.get("LVL"));
+                    sentMessageForNewLeader(sendStr,ServerPort.get("MTL"));
 
                 }
                 else if(recvStr.equals("LVL")){
@@ -289,6 +291,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                     byte[] sendBuf = sendStr.getBytes();
                     DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, DefinePort.LVL_FD_PORT);
                     server.send(sendPacket);
+                    sentMessageForNewLeader(sendStr,ServerPort.get("DDO"));
+                    sentMessageForNewLeader(sendStr,ServerPort.get("MTL"));
+
                 }
                 else if(recvStr.equals("MTL")){
                     LeaderPORT = recvPacket.getPort() + 500;
@@ -300,6 +305,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
                     byte[] sendBuf = sendStr.getBytes();
                     DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, DefinePort.MTL_FD_PORT);
                     server.send(sendPacket);
+                    sentMessageForNewLeader(sendStr,ServerPort.get("LVL"));
+                    sentMessageForNewLeader(sendStr,ServerPort.get("DDO"));
+
                 }
                 byte[] sendBuf = sendStr.getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendBuf, sendBuf.length, addr, Sendport);
@@ -313,5 +321,17 @@ public class frontendImpl extends CreatorPOA implements Serializable{
         }
     }
 
+    public String sentMessageForNewLeader(String sendstr, int targetPort){
+        try {
+            DatagramSocket datagramSocket = new DatagramSocket();
+            InetAddress inetAddress=InetAddress.getByName("localhost");
+            byte[] message =sendstr.getBytes();
+            DatagramPacket replyPacket = new DatagramPacket(message, message.length,inetAddress,targetPort);
+            datagramSocket.send(replyPacket);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Changing imformation is sent.";
+    }
 
 }

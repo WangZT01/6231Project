@@ -83,7 +83,7 @@ public class FailureDetector extends Thread {
 
                         if(replicasList.get(failReplicaIndex)==primary){
                             int theLastOneHeartBeat = replicasList.get(heartBeatRecords.indexOf(0));
-                            //System.out.println(theLastOneHeartBeat);
+                            System.out.println("theLastOneHeartBeat: " + theLastOneHeartBeat);
                             sentMessageForElection(theLastOneHeartBeat-500);
                         }
 

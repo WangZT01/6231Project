@@ -267,3 +267,31 @@ Location: ddo
 Time: Thu Aug 05 23:31:17 EDT 2021 
 
 
+ManagerID: MTL11111
+Create Student Record.
+Name: firstName lastName
+Address: Address 
+Phone: Phone 
+Specialization: Specialization 
+Location: mtl 
+Time: Sat Aug 07 11:43:15 EDT 2021 
+
+
+ManagerID: MTL11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sat Aug 07 11:43:15 EDT 2021 
+
+
+ManagerID: MTL11111
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sat Aug 07 11:43:15 EDT 2021 
+
+
