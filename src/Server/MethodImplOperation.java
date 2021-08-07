@@ -1,10 +1,5 @@
 package Server;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
 import java.rmi.RemoteException;
 
 public class MethodImplOperation extends MethodImpl {
@@ -32,7 +27,7 @@ public class MethodImplOperation extends MethodImpl {
                     result = castBoolean2Return(flag);
                     break;
                 case "3":
-                        result = this.getRecordCounts();
+                        result = this.getRecordCounts(strings[2]);
                         System.out.println("getRecordCounts: " + result);
                         break;
                 case "4":

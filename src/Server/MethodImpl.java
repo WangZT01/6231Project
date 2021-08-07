@@ -612,7 +612,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
 
     //Get the number of records of all servers（include current server） from the current server
     @Override
-    public String getRecordCounts()   {
+    public String getRecordCounts(String managerID)   {
 
         System.out.println("getRecordCounts" + name);
         String sendStrLVL = null;

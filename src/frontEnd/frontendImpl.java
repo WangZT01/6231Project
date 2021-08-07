@@ -122,9 +122,9 @@ public class frontendImpl extends CreatorPOA implements Serializable{
     }
 
     @Override
-    public String getRecordCounts() {
-
-        String messageString = "operation" + ",3,";
+    public String getRecordCounts(String managerID) {
+        ManagerID = managerID;
+        String messageString = "operation" + ",3," + managerID;
         String result = sendUdpMessageWithRet(messageString);
 
         return result;

@@ -127,23 +127,24 @@ public class _CreatorStub extends org.omg.CORBA.portable.ObjectImpl implements S
             }
   } // transferRecord
 
-  public String getRecordCounts ()
+  public String getRecordCounts(String managerID)
   {
-            org.omg.CORBA.portable.InputStream $in = null;
-            try {
-                org.omg.CORBA.portable.OutputStream $out = _request ("getRecordCounts", true);
-                $in = _invoke ($out);
-                String $result = $in.read_string ();
-                return $result;
-            } catch (org.omg.CORBA.portable.ApplicationException $ex) {
-                $in = $ex.getInputStream ();
-                String _id = $ex.getId ();
-                throw new org.omg.CORBA.MARSHAL (_id);
-            } catch (org.omg.CORBA.portable.RemarshalException $rm) {
-                return getRecordCounts (        );
-            } finally {
-                _releaseReply ($in);
-            }
+      org.omg.CORBA.portable.InputStream $in = null;
+      try {
+          org.omg.CORBA.portable.OutputStream $out = _request ("getRecordCounts", true);
+          $out.write_string (managerID);
+          $in = _invoke ($out);
+          String $result = $in.read_string ();
+          return $result;
+      } catch (org.omg.CORBA.portable.ApplicationException $ex) {
+          $in = $ex.getInputStream ();
+          String _id = $ex.getId ();
+          throw new org.omg.CORBA.MARSHAL (_id);
+      } catch (org.omg.CORBA.portable.RemarshalException $rm) {
+          return getRecordCounts (managerID        );
+      } finally {
+          _releaseReply ($in);
+      }
   } // getRecordCounts
 
   // Type-specific CORBA::Object operations

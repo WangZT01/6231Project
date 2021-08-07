@@ -164,3 +164,48 @@ Location: mtl
 Time: Sat Aug 07 00:45:02 EDT 2021 
 
 
+ManagerID: LVL1
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sat Aug 07 19:00:30 EDT 2021 
+
+
+ManagerID: LVL3
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sat Aug 07 19:00:30 EDT 2021 
+
+
+ManagerID: LVL4
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sat Aug 07 19:00:30 EDT 2021 
+
+
+ManagerID: LVL0
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sat Aug 07 19:00:30 EDT 2021 
+
+
+ManagerID: LVL2
+Create Student Record.
+Name: firstName lastName
+CoursesRegister: CoursesRegistered 
+Status: active 
+StatusDate: StatusDate 
+Time: Sat Aug 07 19:00:30 EDT 2021 
+
+

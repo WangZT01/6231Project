@@ -106,8 +106,9 @@ public abstract class CreatorPOA extends org.omg.PortableServer.Servant
 
        case 5:  // ServerModule/Creator/getRecordCounts
        {
+         String ManagerID = in.read_string ();
          String $result = null;
-         $result = this.getRecordCounts ();
+         $result = this.getRecordCounts (ManagerID);
          out = $rh.createReply();
          out.write_string ($result);
          break;

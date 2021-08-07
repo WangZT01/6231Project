@@ -15,5 +15,5 @@ public interface CreatorOperations
   boolean editRecord (String managerID, String recordID, String fieldName, String newValue);
   boolean printRecord (String ManagerID);
   boolean transferRecord (String managerID, String recordID, String remoteCenterServerName);
-  String getRecordCounts ();
+  String getRecordCounts(String managerID);
 } // interface CreatorOperations
