@@ -7,3 +7,95 @@ Location: mtl
 Time: Sat Jul 03 15:50:26 CST 2021 
 
 
+Create Teacher Record.
+Name: Qwe Ewq
+Address: asd 
+Phone: 12345 
+Specialization: cs 
+Location: ddo 
+Time: Sat Aug 07 12:21:01 ADT 2021 
+
+
+Create Student Record.
+Name: Asd Ewq
+CoursesRegister: cs 
+Status: active 
+StatusDate: Aug08 
+Time: Sat Aug 07 12:25:43 ADT 2021 
+
+
+Edit Record.
+RecordID: TR10001
+fieldName: phone 
+newValue: 654321 
+Time: Sat Aug 07 12:27:21 ADT 2021 
+
+
+Create Teacher Record.
+Name: Jiaming Han
+Address: SouthPark 
+Phone: 123456 
+Specialization: cs 
+Location: ddo 
+Time: Sat Aug 07 12:30:19 ADT 2021 
+
+
+Edit Record.
+RecordID: TR10001
+fieldName: phone 
+newValue: 654321 
+Time: Sat Aug 07 12:30:59 ADT 2021 
+
+
+Transfer Record.
+RecordID: TR10002
+remoteCenterServer: LVL 
+
+Create Teacher Record.
+Name: Jiaming Han
+Address: SouthPark 
+Phone: 12345 
+Specialization: cs 
+Location: ddo 
+Time: Sat Aug 07 12:54:34 ADT 2021 
+
+
+Edit Record.
+RecordID: TR10002
+fieldName: phone 
+newValue: 654321 
+Time: Sat Aug 07 12:55:22 ADT 2021 
+
+
+Create Teacher Record.
+Name: Jiaming Han
+Address: Souhtpark 
+Phone: 12345 
+Specialization: cs 
+Location: ddo 
+Time: Sat Aug 07 13:31:06 ADT 2021 
+
+
+Create Student Record.
+Name: Wangzi Tao
+CoursesRegister: cs 
+Status: active 
+StatusDate: 202108 
+Time: Sat Aug 07 13:33:04 ADT 2021 
+
+
+Edit Record.
+RecordID: TR10002
+fieldName: phone 
+newValue: 54321 
+Time: Sat Aug 07 13:34:35 ADT 2021 
+
+
+Transfer Record.
+RecordID: TR10002
+remoteCenterServer: LVL 
+
+Transfer Record.
+RecordID: SR10002
+remoteCenterServer: LVL 
+

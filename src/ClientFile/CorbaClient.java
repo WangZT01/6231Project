@@ -39,11 +39,12 @@ public class CorbaClient {
     }
 
     private void init() {
+
         System.out.println("Client init config starts....");
         String args[] = new String[4];
         args[0] = "-ORBInitialHost";
         args[1] = "127.0.0.1";
-        args[2] = "-ORBInitialPort";
+        args[2] = "ORBInitialPort";
         args[3] = "1050";
 
         //创建一个ORB实例
@@ -56,7 +57,6 @@ public class CorbaClient {
             e.printStackTrace();
         }
         ncRef = NamingContextExtHelper.narrow(objRef);
-
 
         System.out.println("Client init config ends...");
     }
