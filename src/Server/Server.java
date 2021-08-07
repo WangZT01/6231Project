@@ -7,6 +7,7 @@ public class Server {
 
     private FIFOListenerThread fifoListenerThread;
     private HeartBeat heartBeat;
+    //private HeartBeat heartBeat;
 
     public Server(FIFOListenerThread fifoListenerThread, HeartBeat heartBeat){
         this.fifoListenerThread = fifoListenerThread;

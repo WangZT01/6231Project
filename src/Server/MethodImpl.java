@@ -511,7 +511,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
                 //storingRecord(targetRecord, HashMapDDO);
                 //save("DDO");
                 String sendRecord = recordJugdement(targetRecord);
-                sendUdpMessageWithRet(sendRecord,5051);
+                sendUdpMessageWithRet(sendRecord,ServerPort.get("DDO"));
 
 
             }
@@ -519,7 +519,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
                 //storingRecord(targetRecord,HashMapLVL);
                 //save("LVL");
                 String sendRecord = recordJugdement(targetRecord);
-                sendUdpMessageWithRet(sendRecord,5052);
+                sendUdpMessageWithRet(sendRecord,ServerPort.get("LVL"));
 
             }
 
@@ -527,7 +527,7 @@ public class MethodImpl extends CreatorPOA implements Serializable{
                 //storingRecord(targetRecord,HashMapMTL);
                 //save("MTL");
                 String sendRecord = recordJugdement(targetRecord);
-                sendUdpMessageWithRet(sendRecord,5053);
+                sendUdpMessageWithRet(sendRecord,ServerPort.get("MTL"));
 
             }
             else

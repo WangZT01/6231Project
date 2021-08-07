@@ -97,10 +97,10 @@ public class BullyElector2 extends Thread{
         //bully
         BullyElector2 bullyElector=new BullyElector2(DefinePort.DDO_OPEARION_PORT2-500,"DDO");
         bullyElector.start();
-        BullyElector2 bullyElector2=new BullyElector2(DefinePort.LVL_OPEARION_PORT2-500,"LVL");
-        bullyElector2.start();
-        BullyElector2 bullyElector3=new BullyElector2(DefinePort.MTL_OPEARION_PORT2-500,"MTL");
-        bullyElector3.start();
+//        BullyElector2 bullyElector2=new BullyElector2(DefinePort.LVL_OPEARION_PORT2-500,"LVL");
+//        bullyElector2.start();
+//        BullyElector2 bullyElector3=new BullyElector2(DefinePort.MTL_OPEARION_PORT2-500,"MTL");
+//        bullyElector3.start();
 
     }
 }

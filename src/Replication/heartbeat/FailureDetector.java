@@ -59,6 +59,7 @@ public class FailureDetector extends Thread {
                 if(source.startsWith("NL")){
                     String rece = source.substring(2,6);
                     int newleader = Integer.parseInt(rece);
+                    System.out.println("New Leader:" + rece);
                     primary = newleader;
                     source = rece;
                 }
@@ -77,7 +78,7 @@ public class FailureDetector extends Thread {
 
                         if(replicasList.get(failReplicaIndex)==primary){
                             int theLastOneHeartBeat = replicasList.get(heartBeatRecords.indexOf(0));
-                            System.out.println(theLastOneHeartBeat);
+                            //System.out.println(theLastOneHeartBeat);
                             sentMessageForElection(theLastOneHeartBeat-500);
                         }
 

@@ -40,7 +40,7 @@ public class BullyElector3 extends Thread {
 
                 if(message.trim().equals("ELECTION")){//be notify to start election
                     if(bullyMessage.getPort()<myBullyPort && bullyMessage.getPort()!= DefinePort.FailureDetector)
-                        sentMessage("NO",bullyMessage.getPort());
+                        sentMessage("NO",bullyMessage.getPort()-10);
 
                     sentMessage(Servername, DefinePort.FE_OPEARION_PORT);
                 }
@@ -92,10 +92,10 @@ public class BullyElector3 extends Thread {
         //bully
         BullyElector3 bullyElector=new BullyElector3(DefinePort.DDO_OPEARION_PORT3-500,"DDO");
         bullyElector.start();
-        BullyElector3 bullyElector2=new BullyElector3(DefinePort.LVL_OPEARION_PORT3-500,"LVL");
-        bullyElector2.start();
-        BullyElector3 bullyElector3=new BullyElector3(DefinePort.MTL_OPEARION_PORT3-500,"MTL");
-        bullyElector3.start();
+//        BullyElector3 bullyElector2=new BullyElector3(DefinePort.LVL_OPEARION_PORT3-500,"LVL");
+//        bullyElector2.start();
+//        BullyElector3 bullyElector3=new BullyElector3(DefinePort.MTL_OPEARION_PORT3-500,"MTL");
+//        bullyElector3.start();
 
     }
 

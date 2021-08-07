@@ -125,11 +125,13 @@ public class FIFOListenerThread extends Thread {
                     }
                     Sendport = recvPacket.getPort();
                 }
+                //NewLeader
                 if(received.startsWith("NL")){
                     String rece = received.substring(2,6);
                     int newleader = Integer.parseInt(rece);
                     leaderPort = newleader;
                     sendStr = "leader changed";
+                    System.out.println("New Leader:" + rece);
                 }
 
                 InetAddress addr = recvPacket.getAddress();

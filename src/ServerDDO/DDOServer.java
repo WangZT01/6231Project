@@ -23,7 +23,7 @@ public class DDOServer extends Server {
         FIFOBroadcast serverImpl = new FIFOBroadcast("DDO","127.0.0.1");
         FIFOListenerThread ListenerThread1 = new FIFOListenerThread(serverImpl,"127.0.0.1",5051);
         ListenerThread1.run();
-        //bully
+//        //bully
 //        BullyElector1 bullyElector=new BullyElector1(DefinePort.DDO_OPEARION_PORT1-500,"DDO");
 //        bullyElector.start();
 

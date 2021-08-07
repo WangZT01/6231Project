@@ -76,7 +76,7 @@ public class FIFOBroadcast extends MethodImplOperation
     }
 
     public void sendToAll(int leaderport) throws IOException {
-        int DDO_Leader_Port = 5051;
+
         String m = messages.poll();
         String receStr = null;
         byte[] buf = m.getBytes();
