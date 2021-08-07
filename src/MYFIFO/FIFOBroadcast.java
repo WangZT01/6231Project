@@ -16,7 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  Reliable Broadcast.  The broadcast algorithm is unchanged, but
  the delivery algorithm is overridden.
 
- @author Tom Austin
+
  */
 public class FIFOBroadcast extends MethodImplOperation
 {

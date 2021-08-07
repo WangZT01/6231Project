@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="534.0" y="1935.0">Server.Server</node>
+    <node x="1672.0" y="2284.0">SeverMTL.MTLServer2</node>
+    <node x="1463.0" y="2284.0">SeverMTL.MTLServer3</node>
+    <node x="0.0" y="1634.0">RecordFile.StudentRecord</node>
+    <node x="1420.0" y="1935.0">ClientFile.CorbaClient</node>
+    <node x="0.0" y="0.0">Server.MethodImpl</node>
+    <node x="1254.0" y="2284.0">SeverMTL.MTLServer</node>
+    <node x="128.0" y="1034.0">MYFIFO.FIFOBroadcast</node>
+    <node x="1045.0" y="2284.0">ServerLVL.LVLDetector</node>
+    <node x="0.0" y="2144.0">ServerLVL.LVLServer</node>
+    <node x="0.0" y="2382.0">ClientFile.orb.db</node>
+    <node x="836.0" y="2284.0">ServerDDO.DDODetector</node>
+    <node x="1065.6666666666665" y="1164.6666666666667">MYFIFO.FIFOListenerThread</node>
+    <node x="1881.0" y="2284.0">Replication.heartbeat</node>
+    <node x="627.0" y="2284.0">ServerDDO.DDOServer2</node>
+    <node x="418.0" y="2284.0">ServerDDO.DDOServer3</node>
+    <node x="1045.0" y="2144.0">ServerDDO.DDOServer</node>
+    <node x="394.0" y="1623.0">RecordFile.TeacherRecord</node>
+    <node x="2077.0" y="2284.0">Replication.election</node>
+    <node x="605.0" y="0.0">frontEnd.frontendImpl</node>
+    <node x="301.0" y="1348.0">RecordFile.Record</node>
+    <node x="1162.0" y="0.0">Define.DefinePort</node>
+    <node x="1671.0" y="1935.0">Define.Timeout</node>
+    <node x="1984.0" y="1935.0">ManagerFile.Manager</node>
+    <node x="141.5" y="867.0">Server.MethodImplOperation</node>
+    <node x="209.0" y="2284.0">SeverMTL.MTLDetector</node>
+    <node x="0.0" y="2284.0">frontEnd.frontEndServer</node>
+    <node x="343.0" y="2144.0">ServerLVL.LVLServer3</node>
+    <node x="694.0" y="2144.0">ServerLVL.LVLServer2</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ServerDDO.DDOServer" target="Server.Server">
+      <point x="0.0" y="-47.5" />
+      <point x="1210.0" y="2114.0" />
+      <point x="796.5" y="2114.0" />
+      <point x="112.5" y="79.5" />
+    </edge>
+    <edge source="MYFIFO.FIFOBroadcast" target="Server.MethodImplOperation">
+      <point x="0.0" y="-134.5" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="RecordFile.TeacherRecord" target="RecordFile.Record">
+      <point x="0.0" y="-133.5" />
+      <point x="604.0" y="1598.0" />
+      <point x="442.75" y="1598.0" />
+      <point x="47.25" y="112.5" />
+    </edge>
+    <edge source="Server.MethodImplOperation" target="Server.MethodImpl">
+      <point x="0.0" y="-58.5" />
+      <point x="0.0" y="408.5" />
+    </edge>
+    <edge source="RecordFile.StudentRecord" target="RecordFile.Record">
+      <point x="0.0" y="-122.5" />
+      <point x="187.0" y="1598.0" />
+      <point x="348.25" y="1598.0" />
+      <point x="-47.25" y="112.5" />
+    </edge>
+    <edge source="ServerLVL.LVLServer3" target="Server.Server">
+      <point x="0.0" y="-47.5" />
+      <point x="508.5" y="2124.0" />
+      <point x="646.5" y="2124.0" />
+      <point x="-37.5" y="79.5" />
+    </edge>
+    <edge source="ServerLVL.LVLServer" target="Server.Server">
+      <point x="0.0" y="-47.5" />
+      <point x="161.5" y="2114.0" />
+      <point x="571.5" y="2114.0" />
+      <point x="-112.5" y="79.5" />
+    </edge>
+    <edge source="ServerLVL.LVLServer2" target="Server.Server">
+      <point x="0.0" y="-47.5" />
+      <point x="859.5" y="2124.0" />
+      <point x="721.5" y="2124.0" />
+      <point x="37.5" y="79.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="1070.0" y="1739.6666666666663" />
+  <SelectedNodes>
+    <node>MYFIFO.FIFOListenerThread</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

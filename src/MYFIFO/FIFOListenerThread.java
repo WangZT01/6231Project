@@ -12,7 +12,7 @@ import java.util.*;
  This class listens for broadcast messages and reports them to the
  ReliableBroadcastProcss that spawned it.
 
- @author Tom Austin
+
  */
 public class FIFOListenerThread extends Thread {
     //RB process that this class corresponds to.
