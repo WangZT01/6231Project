@@ -22,8 +22,8 @@ public class DDOServer3 {
         //heartBeat3.startUp();
 
         ListenerThread3.run();
-        BullyElector3 bullyElector=new BullyElector3(DefinePort.DDO_OPEARION_PORT3-500,serverImpl.name);
-        bullyElector.start();
+//        BullyElector3 bullyElector=new BullyElector3(DefinePort.DDO_OPEARION_PORT3-500,serverImpl.name);
+//        bullyElector.start();
     }
 
 

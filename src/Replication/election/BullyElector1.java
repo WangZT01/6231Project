@@ -96,5 +96,16 @@ public class BullyElector1 extends Thread{
         return flag;
     }
 
+    public static void main(String args[]) throws RemoteException {
 
+
+        //bully
+        BullyElector1 bullyElector=new BullyElector1(DefinePort.DDO_OPEARION_PORT1-500,"DDO");
+        bullyElector.start();
+        BullyElector1 bullyElector2=new BullyElector1(DefinePort.LVL_OPEARION_PORT1-500,"LVL");
+        bullyElector2.start();
+        BullyElector1 bullyElector3=new BullyElector1(DefinePort.MTL_OPEARION_PORT1-500,"MTL");
+        bullyElector3.start();
+
+    }
 }

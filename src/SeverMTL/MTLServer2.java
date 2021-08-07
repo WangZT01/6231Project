@@ -19,8 +19,8 @@ public class MTLServer2 {
         FIFOListenerThread ListenerThread2 = new FIFOListenerThread(serverImpl,"127.0.0.1",5053);
         ListenerThread2.run();
         //bully
-        BullyElector2 bullyElector=new BullyElector2(DefinePort.MTL_OPEARION_PORT2-500,"MTL");
-        bullyElector.start();
+//        BullyElector2 bullyElector=new BullyElector2(DefinePort.MTL_OPEARION_PORT2-500,"MTL");
+//        bullyElector.start();
 
     }
 

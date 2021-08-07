@@ -25,8 +25,8 @@ public class LVLServer3 extends Server {
         FIFOListenerThread ListenerThread3 = new FIFOListenerThread(serverImpl,"127.0.0.1",5072);
         ListenerThread3.run();
         //bully
-        BullyElector3 bullyElector=new BullyElector3(DefinePort.LVL_OPEARION_PORT3-500,"LVL");
-        bullyElector.start();
+//        BullyElector3 bullyElector=new BullyElector3(DefinePort.LVL_OPEARION_PORT3-500,"LVL");
+//        bullyElector.start();
 
     }
 }

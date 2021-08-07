@@ -20,8 +20,8 @@ public class DDOServer2 {
         FIFOListenerThread ListenerThread2 = new FIFOListenerThread(serverImpl,"127.0.0.1",5061);
 
         ListenerThread2.run();
-       BullyElector2 bullyElector=new BullyElector2(DefinePort.DDO_OPEARION_PORT2-500,serverImpl.name);
-        bullyElector.start();
+//        BullyElector2 bullyElector=new BullyElector2(DefinePort.DDO_OPEARION_PORT2-500,serverImpl.name);
+//        bullyElector.start();
 
     }
 

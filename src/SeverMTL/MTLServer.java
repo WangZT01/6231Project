@@ -32,9 +32,9 @@ public class MTLServer {
         FIFOBroadcast serverImpl = new FIFOBroadcast("MTL","127.0.0.1");
         FIFOListenerThread ListenerThread1 = new FIFOListenerThread(serverImpl,"127.0.0.1",5053);
         ListenerThread1.run();
-        //bully
-        BullyElector1 bullyElector=new BullyElector1(DefinePort.MTL_OPEARION_PORT1-500,"MTL");
-        bullyElector.start();
+//        //bully
+//        BullyElector1 bullyElector=new BullyElector1(DefinePort.MTL_OPEARION_PORT1-500,"MTL");
+//        bullyElector.start();
 
     }
 
