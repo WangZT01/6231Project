@@ -99,3 +99,47 @@ Transfer Record.
 RecordID: SR10002
 remoteCenterServer: LVL 
 
+Create Teacher Record.
+Name: Fsname Lsname
+Address: addr 
+Phone: 123456 
+Specialization: cs 
+Location: ddo 
+Time: Sat Aug 07 18:29:16 ADT 2021 
+
+
+Create Teacher Record.
+Name: Fsname Lsname
+Address: addr 
+Phone: 123456 
+Specialization: cs 
+Location: ddo 
+Time: Sat Aug 07 18:43:20 ADT 2021 
+
+
+Create Teacher Record.
+Name: Fsname Lsname
+Address: addr 
+Phone: 12345 
+Specialization: cs 
+Location: ddo 
+Time: Sat Aug 07 18:49:52 ADT 2021 
+
+
+Create Student Record.
+Name: Asd Twqt
+CoursesRegister: sfdf 
+Status: active 
+StatusDate: dsad12 
+Time: Sat Aug 07 20:57:10 ADT 2021 
+
+
+Create Teacher Record.
+Name: Jiaming Han
+Address: addr 
+Phone: 12355 
+Specialization: cs 
+Location: ddo 
+Time: Sat Aug 07 21:06:21 ADT 2021 
+
+

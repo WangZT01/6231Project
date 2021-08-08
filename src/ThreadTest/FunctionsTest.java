@@ -91,7 +91,7 @@ public class FunctionsTest {
                 "MTL11111","firstName", "lastName",
                 "CoursesRegistered", "active", "StatusDate");
         result = methodImpl.editRecord("MTL11111", "TR10001","Location","mtl");
-        Assert.assertEquals(result, false);
+        Assert.assertEquals(result, true);
 
     }
 
